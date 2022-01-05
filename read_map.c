@@ -4,7 +4,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
     FILE *fptr;
     int tmp;
     struct map * tmp_node;
-    fptr = fopen("/c-code/project/map.txt","r");
+    fptr = fopen("D://project/map.txt","r");
+    FILE *fc = fptr;
     if(fptr == NULL) {
         printf("Error! opening file");
         exit(1);
@@ -152,13 +153,67 @@ void read_map(struct map *fmap,int road_x,int road_y) {
             }
         }
     }
+    fclose(fc);
+    tmp_node = fmap;
 
-    for (int i = 0; i < road_y; --i) {
+    for (int i = road_y; i > 0; --i) {
         for (int j = 0; j < road_x; ++j) {
-            printf("%s ",tmp_node->road);
+            /*for (int k = 0; k < all_map; ++k) {
+                while()
+            }*/
+            if(strcmp(tmp_node->person,"IL") == 1) {
+                printf("IL ");
+            }
+            else if(strcmp(tmp_node->person,"WG") == 1) {
+                printf("WG ");
+            }
+            else if(strcmp(tmp_node->person,"JB") == 1) {
+                printf("JB ");
+            }
+            else if(strcmp(tmp_node->person,"JS") == 1) {
+                printf("JS ");
+            }
+            else if(strcmp(tmp_node->person,"MS") == 1) {
+                printf("MS ");
+            }
+            else if(strcmp(tmp_node->person,"JW") == 1) {
+                printf("JW ");
+            }
+            else if(strcmp(tmp_node->person,"SH") == 1) {
+                printf("SH ");
+            }
+            else if(strcmp(tmp_node->person,"SG") == 1) {
+                printf("SG ");
+            }
+            else if(strcmp(tmp_node->home,"H") == 1) {
+                printf("H ");
+            }
+            else if(strcmp(tmp_node->exit,"X") == 1) {
+                printf("X");
+            }
+            else if(strcmp(tmp_node->exit,"E") == 1) {
+                printf("E ");
+            }
+            else if(strcmp(tmp_node->light,"L") == 1) {
+                printf("L ");
+            }
+            else if(strcmp(tmp_node->light,"O") == 1) {
+                printf("O ");
+            }
+            else if(strcmp(tmp_node->tunnel,"C") == 1) {
+                printf("C ");
+            }
+            else if(strcmp(tmp_node->tunnel,"T") == 1) {
+                printf("T ");
+            }
+            else if(strcmp(tmp_node->road,"R") == 1) {
+                printf("R ");
+            }
+            else {
+                printf("N");
+            }
+            tmp_node = tmp_node->next;
         }
+        printf("\n");
     }
-
-
-
 }

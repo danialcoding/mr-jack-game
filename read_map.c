@@ -158,9 +158,6 @@ void read_map(struct map *fmap,int road_x,int road_y) {
 
     for (int i = road_y; i > 0; --i) {
         for (int j = 0; j < road_x; ++j) {
-            /*for (int k = 0; k < all_map; ++k) {
-                while()
-            }*/
             if(!strcmp(tmp_node->person,"IL")) {
                 printf("IL ");
             }

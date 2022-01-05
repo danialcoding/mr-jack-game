@@ -19,6 +19,7 @@ int rounds = 8;
 int main() {
     struct map *fmap = NULL;
 
-    read_map(fmap,road_x,road_y);
+    start_menu(fmap,road_x,road_y);
+
 
 }

@@ -4,7 +4,7 @@ void read_map(struct map *fmap,int road_x,int road_y) {
     FILE *fptr;
     int tmp;
     struct map * tmp_node;
-    fptr = fopen("D://project/map.txt","r");
+    fptr = fopen("/./c-code/project/map.txt","r");
     FILE *fc = fptr;
     if(fptr == NULL) {
         printf("Error! opening file");
@@ -16,140 +16,140 @@ void read_map(struct map *fmap,int road_x,int road_y) {
             fscanf(fptr,"%d",&tmp);
 
             if(tmp == 0) {
-                tmp_node->road = "R";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "N";
-                tmp_node->person = "N";
-                tmp_node->exit = "N";
+                tmp_node->road = "RD";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "NN";
+                tmp_node->person = "NN";
+                tmp_node->exit = "NN";
             }
             else if(tmp == 1) {
-                tmp_node->road = "N";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "H";
-                tmp_node->person = "N";
-                tmp_node->exit = "N";
+                tmp_node->road = "NN";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "HM";
+                tmp_node->person = "NN";
+                tmp_node->exit = "NN";
             }
             else if(tmp == 2){
-                tmp_node->road = "N";
-                tmp_node->light = "O";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "N";
-                tmp_node->person = "N";
-                tmp_node->exit = "N";
+                tmp_node->road = "NN";
+                tmp_node->light = "LF";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "NN";
+                tmp_node->person = "NN";
+                tmp_node->exit = "NN";
             }
             else if(tmp == 3){
-                tmp_node->road = "R";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "T";
-                tmp_node->home = "N";
-                tmp_node->person = "N";
-                tmp_node->exit = "N";
+                tmp_node->road = "RD";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "TO";
+                tmp_node->home = "NN";
+                tmp_node->person = "NN";
+                tmp_node->exit = "NN";
             }
             else if(tmp == 4){
-                tmp_node->road = "R";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "N";
-                tmp_node->person = "N";
-                tmp_node->exit = "E";
+                tmp_node->road = "RD";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "NN";
+                tmp_node->person = "NN";
+                tmp_node->exit = "EO";
             }
             else if(tmp == 5){
-                tmp_node->road = "N";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "N";
-                tmp_node->person = "N";
-                tmp_node->exit = "N";
+                tmp_node->road = "NN";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "NN";
+                tmp_node->person = "NN";
+                tmp_node->exit = "NN";
             }
             else if(tmp == 22){
-                tmp_node->road = "N";
-                tmp_node->light = "L";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "N";
-                tmp_node->person = "N";
-                tmp_node->exit = "N";
+                tmp_node->road = "NN";
+                tmp_node->light = "LN";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "NN";
+                tmp_node->person = "NN";
+                tmp_node->exit = "NN";
             }
             else if(tmp == 33){
-                tmp_node->road = "R";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "C";
-                tmp_node->home = "N";
-                tmp_node->person = "N";
-                tmp_node->exit = "N";
+                tmp_node->road = "RD";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "TC";
+                tmp_node->home = "NN";
+                tmp_node->person = "NN";
+                tmp_node->exit = "NN";
             }
             else if(tmp == 44){
-                tmp_node->road = "N";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "N";
-                tmp_node->person = "N";
-                tmp_node->exit = "X";
+                tmp_node->road = "NN";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "NN";
+                tmp_node->person = "NN";
+                tmp_node->exit = "EC";
             }
             else if(tmp == 11){
-                tmp_node->road = "R";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "N";
+                tmp_node->road = "RD";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "NN";
                 tmp_node->person = "SG";
-                tmp_node->exit = "N";
+                tmp_node->exit = "NN";
             }
             else if(tmp == 12){
-                tmp_node->road = "R";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "N";
+                tmp_node->road = "RD";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "NN";
                 tmp_node->person = "SH";
-                tmp_node->exit = "N";
+                tmp_node->exit = "NN";
             }
             else if(tmp == 13){
-                tmp_node->road = "R";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "N";
+                tmp_node->road = "RD";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "NN";
                 tmp_node->person = "JW";
-                tmp_node->exit = "N";
+                tmp_node->exit = "NN";
             }
             else if(tmp == 14){
-                tmp_node->road = "R";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "N";
+                tmp_node->road = "RD";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "NN";
                 tmp_node->person = "MS";
-                tmp_node->exit = "N";
+                tmp_node->exit = "NN";
             }
             else if(tmp == 15){
-                tmp_node->road = "R";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "N";
+                tmp_node->road = "RD";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "NN";
                 tmp_node->person = "JS";
-                tmp_node->exit = "N";
+                tmp_node->exit = "NN";
             }
             else if(tmp == 16){
-                tmp_node->road = "R";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "N";
+                tmp_node->road = "RD";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "NN";
                 tmp_node->person = "JB";
-                tmp_node->exit = "N";
+                tmp_node->exit = "NN";
             }
             else if(tmp == 17){
-                tmp_node->road = "R";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "N";
+                tmp_node->road = "RD";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "NN";
                 tmp_node->person = "WG";
-                tmp_node->exit = "N";
+                tmp_node->exit = "NN";
             }
             else if(tmp == 18){
-                tmp_node->road = "R";
-                tmp_node->light = "N";
-                tmp_node->tunnel = "N";
-                tmp_node->home = "N";
+                tmp_node->road = "RD";
+                tmp_node->light = "NN";
+                tmp_node->tunnel = "NN";
+                tmp_node->home = "NN";
                 tmp_node->person = "IL";
-                tmp_node->exit = "N";
+                tmp_node->exit = "NN";
             }
         }
     }
@@ -161,56 +161,56 @@ void read_map(struct map *fmap,int road_x,int road_y) {
             /*for (int k = 0; k < all_map; ++k) {
                 while()
             }*/
-            if(strcmp(tmp_node->person,"IL") == 1) {
+            if(!strcmp(tmp_node->person,"IL")) {
                 printf("IL ");
             }
-            else if(strcmp(tmp_node->person,"WG") == 1) {
+            else if(!strcmp(tmp_node->person,"WG")) {
                 printf("WG ");
             }
-            else if(strcmp(tmp_node->person,"JB") == 1) {
+            else if(!strcmp(tmp_node->person,"JB")) {
                 printf("JB ");
             }
-            else if(strcmp(tmp_node->person,"JS") == 1) {
+            else if(!strcmp(tmp_node->person,"JS")) {
                 printf("JS ");
             }
-            else if(strcmp(tmp_node->person,"MS") == 1) {
+            else if(!strcmp(tmp_node->person,"MS")) {
                 printf("MS ");
             }
-            else if(strcmp(tmp_node->person,"JW") == 1) {
+            else if(!strcmp(tmp_node->person,"JW")) {
                 printf("JW ");
             }
-            else if(strcmp(tmp_node->person,"SH") == 1) {
+            else if(!strcmp(tmp_node->person,"SH")) {
                 printf("SH ");
             }
-            else if(strcmp(tmp_node->person,"SG") == 1) {
+            else if(!strcmp(tmp_node->person,"SG")) {
                 printf("SG ");
             }
-            else if(strcmp(tmp_node->home,"H") == 1) {
-                printf("H ");
+            else if(!strcmp(tmp_node->home,"HM")) {
+                printf("HM ");
             }
-            else if(strcmp(tmp_node->exit,"X") == 1) {
-                printf("X");
+            else if(!strcmp(tmp_node->exit,"EC")) {
+                printf("XX ");
             }
-            else if(strcmp(tmp_node->exit,"E") == 1) {
-                printf("E ");
+            else if(!strcmp(tmp_node->exit,"EO")) {
+                printf("ET ");
             }
-            else if(strcmp(tmp_node->light,"L") == 1) {
-                printf("L ");
+            else if(!strcmp(tmp_node->light,"LN")) {
+                printf("LN ");
             }
-            else if(strcmp(tmp_node->light,"O") == 1) {
-                printf("O ");
+            else if(!strcmp(tmp_node->light,"LF")) {
+                printf("LO ");
             }
-            else if(strcmp(tmp_node->tunnel,"C") == 1) {
-                printf("C ");
+            else if(!strcmp(tmp_node->tunnel,"TC")) {
+                printf("CT ");
             }
-            else if(strcmp(tmp_node->tunnel,"T") == 1) {
-                printf("T ");
+            else if(!strcmp(tmp_node->tunnel,"TO")) {
+                printf("OT ");
             }
-            else if(strcmp(tmp_node->road,"R") == 1) {
-                printf("R ");
+            else if(!strcmp(tmp_node->road,"RD")) {
+                printf("RD ");
             }
             else {
-                printf("N");
+                printf("NN ");
             }
             tmp_node = tmp_node->next;
         }

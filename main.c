@@ -9,6 +9,12 @@ struct map {
     int y;
     struct map* next;
 };
+struct characters {
+    char *name;
+    char *jack;
+    int move;
+    int ability;
+};
 
 #include "func.h"
 

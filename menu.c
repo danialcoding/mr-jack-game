@@ -7,7 +7,7 @@ void start_menu(struct map *fmap,int road_x,int road_y) {
         read_map(fmap,road_x,road_y);
     }
     else if(tmp == 2) {
-
+        ///problem
     }
     else if(tmp == 3) {
         exit(0);

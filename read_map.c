@@ -12,7 +12,7 @@ void read_map(struct map *fmap,int road_x,int road_y) {
     }
     for (int i = road_y; i > 0; --i) {
         for (int j = 0; j < road_x; ++j) {
-            tmp_node = append(&fmap,i,j);
+            tmp_node = map_append(&fmap);
             fscanf(fptr,"%d",&tmp);
 
             if(tmp == 0) {
@@ -151,6 +151,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person = "IL";
                 tmp_node->exit = "NN";
             }
+            tmp_node->x = i;
+            tmp_node->y = j;
         }
     }
     fclose(fc);

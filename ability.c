@@ -1,0 +1,4 @@
+
+void card_ability() {
+
+}

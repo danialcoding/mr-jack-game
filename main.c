@@ -3,8 +3,10 @@ struct map {
     char *light;
     char *tunnel;
     char *home;
-    char *person;
+    char *person1;
+    char *person2;
     char *exit;
+    int Lighting;
     int x;
     int y;
     struct map* next;
@@ -15,6 +17,7 @@ struct characters {
     int move;
     int number;
     char *info;
+    char *ability_time;
     struct characters* next;
 };
 

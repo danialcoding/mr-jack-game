@@ -1,4 +1,5 @@
 
+void print_map(struct map * tmp_node,int road_x,int road_y);
 
 void read_map(struct map *fmap,int road_x,int road_y) {
     FILE *fptr;
@@ -20,7 +21,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "NN";
-                tmp_node->person = "NN";
+                tmp_node->person1 = "NN";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             else if(tmp == 1) {
@@ -28,7 +30,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "HM";
-                tmp_node->person = "NN";
+                tmp_node->person1 = "NN";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             else if(tmp == 2){
@@ -36,7 +39,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "LF";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "NN";
-                tmp_node->person = "NN";
+                tmp_node->person1 = "NN";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             else if(tmp == 3){
@@ -44,7 +48,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "TO";
                 tmp_node->home = "NN";
-                tmp_node->person = "NN";
+                tmp_node->person1 = "NN";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             else if(tmp == 4){
@@ -52,7 +57,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "NN";
-                tmp_node->person = "NN";
+                tmp_node->person1 = "NN";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "EO";
             }
             else if(tmp == 5){
@@ -60,7 +66,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "NN";
-                tmp_node->person = "NN";
+                tmp_node->person1 = "NN";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             else if(tmp == 22){
@@ -68,7 +75,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "LN";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "NN";
-                tmp_node->person = "NN";
+                tmp_node->person1 = "NN";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             else if(tmp == 33){
@@ -76,7 +84,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "TC";
                 tmp_node->home = "NN";
-                tmp_node->person = "NN";
+                tmp_node->person1 = "NN";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             else if(tmp == 44){
@@ -84,7 +93,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "NN";
-                tmp_node->person = "NN";
+                tmp_node->person1 = "NN";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "EC";
             }
             else if(tmp == 11){
@@ -92,7 +102,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "NN";
-                tmp_node->person = "SG";
+                tmp_node->person1 = "SG";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             else if(tmp == 12){
@@ -100,7 +111,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "NN";
-                tmp_node->person = "SH";
+                tmp_node->person1 = "SH";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             else if(tmp == 13){
@@ -108,7 +120,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "NN";
-                tmp_node->person = "JW";
+                tmp_node->person1 = "JW";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             else if(tmp == 14){
@@ -116,7 +129,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "NN";
-                tmp_node->person = "MS";
+                tmp_node->person1 = "MS";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             else if(tmp == 15){
@@ -124,7 +138,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "NN";
-                tmp_node->person = "JS";
+                tmp_node->person1 = "JS";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             else if(tmp == 16){
@@ -132,7 +147,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "NN";
-                tmp_node->person = "JB";
+                tmp_node->person1 = "JB";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             else if(tmp == 17){
@@ -140,7 +156,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "NN";
-                tmp_node->person = "WG";
+                tmp_node->person1 = "WG";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             else if(tmp == 18){
@@ -148,7 +165,8 @@ void read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->light = "NN";
                 tmp_node->tunnel = "NN";
                 tmp_node->home = "NN";
-                tmp_node->person = "IL";
+                tmp_node->person1 = "IL";
+                tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
             }
             tmp_node->x = i;
@@ -158,32 +176,47 @@ void read_map(struct map *fmap,int road_x,int road_y) {
     fclose(fc);
     tmp_node = fmap;
 
+    print_map(tmp_node,road_x,road_y);
+}
+
+void print_map(struct map * tmp_node,int road_x,int road_y) {
     for (int i = road_y; i > 0; --i) {
         for (int j = 0; j < road_x; ++j) {
-            if(!strcmp(tmp_node->person,"IL")) {
+            if(!(!strcmp(tmp_node->person1,"NN")) && !(!strcmp(tmp_node->person2,"NN"))) {
+                printf("%s,%s ",tmp_node->person1,tmp_node->person2);
+            }
+            else if(!(!strcmp(tmp_node->person1,"NN"))) {
+                printf("%s ",tmp_node->person1);
+            }
+            else if(!(!strcmp(tmp_node->person2,"NN"))) {
+                printf("%s ",tmp_node->person2);
+            }
+
+            /*else if(!strcmp(tmp_node->person1,"IL")) {
                 printf("IL ");
             }
-            else if(!strcmp(tmp_node->person,"WG")) {
+            else if(!strcmp(tmp_node->person1,"WG")) {
                 printf("WG ");
             }
-            else if(!strcmp(tmp_node->person,"JB")) {
+            else if(!strcmp(tmp_node->person1,"JB")) {
                 printf("JB ");
             }
-            else if(!strcmp(tmp_node->person,"JS")) {
+            else if(!strcmp(tmp_node->person1,"JS")) {
                 printf("JS ");
             }
-            else if(!strcmp(tmp_node->person,"MS")) {
+            else if(!strcmp(tmp_node->person1,"MS")) {
                 printf("MS ");
             }
-            else if(!strcmp(tmp_node->person,"JW")) {
+            else if(!strcmp(tmp_node->person1,"JW")) {
                 printf("JW ");
             }
-            else if(!strcmp(tmp_node->person,"SH")) {
+            else if(!strcmp(tmp_node->person1,"SH")) {
                 printf("SH ");
             }
-            else if(!strcmp(tmp_node->person,"SG")) {
+            else if(!strcmp(tmp_node->person1,"SG")) {
                 printf("SG ");
-            }
+            }*/
+
             else if(!strcmp(tmp_node->home,"HM")) {
                 printf("HM ");
             }

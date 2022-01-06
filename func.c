@@ -35,7 +35,7 @@ void rand_select_jack(struct characters *character_ptr) {
     tmp = random_num_1_8();
     for (int i = 0; i < 8; ++i) {
         if(character_ptr->number == tmp) {
-            printf("jack is : %s\n",character_ptr->name);
+            printf("jack is : %s\n\n",character_ptr->name);
             character_ptr->jack = "YES";
             return;
         }
@@ -60,5 +60,8 @@ int * rand_cards(int rounds) {
 
         return card_array;
     }
+}
 
+void win_func() {
+    /// next every move should run it
 }

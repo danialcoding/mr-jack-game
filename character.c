@@ -82,10 +82,10 @@ void show_character(int *ptr_card_array,int rounds,struct characters *character_
                 }
                 character_ptr = character_ptr->next;
             }
-            character_ptr = first;
             printf("%d)character %s\n",i+1,character_ptr->name);
             printf("Move 1 to %d houses.\n",character_ptr->move);
             printf("%s.\n",character_ptr->info);
+            character_ptr = first;
         }
     }
     else {
@@ -96,10 +96,10 @@ void show_character(int *ptr_card_array,int rounds,struct characters *character_
                 }
                 character_ptr = character_ptr->next;
             }
-            character_ptr = first;
             printf("%d)character %s\n",i+1,character_ptr->name);
             printf("Move 1 to %d houses.\n",character_ptr->move);
             printf("%s.\n",character_ptr->info);
+            character_ptr = first;
         }
     }
 }

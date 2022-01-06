@@ -5,5 +5,6 @@
 #include "func.c"
 #include "character.c"
 #include "read_map.c"
+#include "play_round.c"
 #include "menu.c"
 

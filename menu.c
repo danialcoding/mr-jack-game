@@ -1,7 +1,8 @@
 
-void start_menu(struct map *fmap,int road_x,int road_y,struct characters *character_ptr,int rounds) {
+void start_menu(struct map *fmap,int road_x,int road_y,struct characters *character_ptr,int rounds,struct out_tunnel *tunnel_out_ptr) {
     int tmp;
     int *ptr_card_array = NULL;
+    struct map *first_map_ptr;
     printf("1)Start \n2)Load\n3)Exit\n");
     scanf("%d",&tmp);
     if(tmp == 1) {
@@ -13,9 +14,9 @@ void start_menu(struct map *fmap,int road_x,int road_y,struct characters *charac
 
         show_character(ptr_card_array,rounds,character_ptr);
 
-        read_map(fmap,road_x,road_y);
+        first_map_ptr = read_map(fmap,road_x,road_y);
 
-        play_rounds(ptr_card_array,rounds,character_ptr,fmap);
+        play_rounds(ptr_card_array,rounds,character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
     }
     else if(tmp == 2) {
         ///problem
@@ -24,7 +25,7 @@ void start_menu(struct map *fmap,int road_x,int road_y,struct characters *charac
         exit(0);
     }
     else {
-        start_menu(fmap,road_x,road_y,character_ptr,rounds);
+        start_menu(fmap,road_x,road_y,character_ptr,rounds,tunnel_out_ptr);
     }
 }
 

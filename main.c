@@ -20,6 +20,11 @@ struct characters {
     char *ability_time;
     struct characters* next;
 };
+struct out_tunnel {
+    int x;
+    int y;
+    struct out_tunnel *next;
+};
 
 #include "func.h"
 
@@ -30,8 +35,9 @@ int rounds = 1;
 int main() {
     struct map *fmap = NULL;
     struct characters *character_ptr = NULL;
+    struct out_tunnel *tunnel_out_ptr = NULL;
 
-    start_menu(fmap,road_x,road_y,character_ptr,rounds);
+    start_menu(fmap,road_x,road_y,character_ptr,rounds,tunnel_out_ptr);
 
 
 }

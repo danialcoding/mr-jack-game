@@ -1,6 +1,6 @@
 
 struct characters c_sg,c_sh,c_jw,c_ms,c_js,c_jb,c_wg,c_il;
-void card_movement(struct characters *character_ptr,struct map *fmap);
+void card_movement(struct characters *character_ptr,struct map *fmap,struct out_tunnel *tunnel_out_ptr);
 
 struct characters* create_caracter_info(struct characters *character_ptr) {
     character_ptr = &c_sg;
@@ -112,7 +112,7 @@ void show_character(int *ptr_card_array,int rounds,struct characters *character_
     }
 }
 
-void choose_move_abl(struct characters *character_ptr,int card_number,struct map *fmap) {
+void choose_move_abl(struct characters *character_ptr,int card_number,struct map *first_map_ptr,struct out_tunnel *tunnel_out_ptr) {
     struct characters *first = character_ptr;
     while(character_ptr != NULL) {
         if(character_ptr->number == card_number) {
@@ -128,7 +128,7 @@ void choose_move_abl(struct characters *character_ptr,int card_number,struct map
         printf("1)Move\n2)ability\n");
         scanf("%d",&user_choose);
         if(user_choose == 1) {
-            card_movement(character_ptr,fmap);
+            card_movement(character_ptr,first_map_ptr,tunnel_out_ptr);
         }
         else if(user_choose == 2) {
             ///problem
@@ -136,7 +136,7 @@ void choose_move_abl(struct characters *character_ptr,int card_number,struct map
     }
     else if(!strcmp(tmp_move,"NX")) {
         printf("Move:\n");
-        card_movement(character_ptr,fmap);
+        card_movement(character_ptr,first_map_ptr,tunnel_out_ptr);
         printf("Ability:\n");
         ///problem
     }
@@ -144,7 +144,7 @@ void choose_move_abl(struct characters *character_ptr,int card_number,struct map
         printf("1)Move OR 2)ability\n");
         scanf("%d",&user_choose);
         if(user_choose == 1) {
-            card_movement(character_ptr,fmap);
+            card_movement(character_ptr,first_map_ptr,tunnel_out_ptr);
         }
         else if(user_choose == 2) {
             ///problem

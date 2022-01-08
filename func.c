@@ -19,6 +19,26 @@ struct map* map_append(struct map** head) {
     last->next = new_node;
     return new_node;
 }
+struct out_tunnel* out_tunnel_append(struct out_tunnel** head) {
+
+    struct out_tunnel *new_node = (struct out_tunnel*) malloc(sizeof(struct out_tunnel));
+
+    struct out_tunnel *last = *head;
+
+    new_node->next = NULL;
+
+    if (*head == NULL) {
+        *head = new_node;
+        return new_node;
+    }
+
+    while (last->next != NULL) {
+        last = last->next;
+    }
+
+    last->next = new_node;
+    return new_node;
+}
 
 int random_num_1_8() {
     int tmp;
@@ -57,7 +77,6 @@ int * rand_cards(int rounds) {
             card_array[i] = card_array[r];
             card_array[r] = tmp;
         }
-
         return card_array;
     }
 }

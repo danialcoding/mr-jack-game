@@ -16,6 +16,7 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
     int array[4];
     int i = 0;
     struct map *first_mptr2 = first_map_ptr;
+
     if(rounds % 2 == 1) {
         printf("Inspector turn.\n");
         printf("choose a card and type card number :\n");

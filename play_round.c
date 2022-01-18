@@ -25,7 +25,7 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
 
         n = tmp - 1;
         n = *(ptr_card_array + n);
-        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr);
+        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
@@ -39,7 +39,7 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
 
         n = tmp - 1;
         n = *(ptr_card_array + n);
-        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr);
+        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
@@ -53,7 +53,7 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
 
         n = tmp - 1;
         n = *(ptr_card_array + n);
-        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr);
+        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
@@ -67,7 +67,7 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
 
         n = tmp - 1;
         n = *(ptr_card_array + n);
-        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr);
+        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
@@ -82,7 +82,7 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
 
         n = tmp + 3;
         n = *(ptr_card_array + n);
-        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr);
+        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
@@ -96,7 +96,7 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
 
         n = tmp + 3;
         n = *(ptr_card_array + n);
-        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr);
+        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
@@ -110,7 +110,7 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
 
         n = tmp + 3;
         n = *(ptr_card_array + n);
-        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr);
+        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
@@ -124,7 +124,7 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
 
         n = tmp + 3;
         n = *(ptr_card_array + n);
-        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr);
+        choose_move_abl(character_ptr,n,first_map_ptr,tunnel_out_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;

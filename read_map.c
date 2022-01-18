@@ -192,32 +192,6 @@ void print_map(struct map * tmp_node,int road_x,int road_y) {
             else if(!(!strcmp(tmp_node->person2,"NN"))) {
                 printf("%s ",tmp_node->person2);
             }
-
-            /*else if(!strcmp(tmp_node->person1,"IL")) {
-                printf("IL ");
-            }
-            else if(!strcmp(tmp_node->person1,"WG")) {
-                printf("WG ");
-            }
-            else if(!strcmp(tmp_node->person1,"JB")) {
-                printf("JB ");
-            }
-            else if(!strcmp(tmp_node->person1,"JS")) {
-                printf("JS ");
-            }
-            else if(!strcmp(tmp_node->person1,"MS")) {
-                printf("MS ");
-            }
-            else if(!strcmp(tmp_node->person1,"JW")) {
-                printf("JW ");
-            }
-            else if(!strcmp(tmp_node->person1,"SH")) {
-                printf("SH ");
-            }
-            else if(!strcmp(tmp_node->person1,"SG")) {
-                printf("SG ");
-            }*/
-
             else if(!strcmp(tmp_node->home,"HM")) {
                 printf("%s ",tmp_node->home);
             }

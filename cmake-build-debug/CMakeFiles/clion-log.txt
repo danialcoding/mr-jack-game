@@ -1,1 +1,0 @@
-CMakeLists.txt not found in L:\c-code\project Select CMakeLists.txt

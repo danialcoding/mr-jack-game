@@ -134,6 +134,71 @@ void card_ability(struct characters *character_ptr,struct characters *character_
         }
     }
     else if(!strcmp(character_ptr->name,"JB")) {
+        struct swap_ability *opentunnel = NULL;
+        struct swap_ability *opentunnel_tmp_node = NULL;
+        struct swap_ability *Closetunnel = NULL;
+        struct swap_ability *Closetunnel_tmp_node = NULL;
+        int tmp,count = 1,xasli,yasli;
 
+        printf("Closed tunnels :\n");
+        while(tmpnode1 != NULL) {
+            if(!strcmp(tmpnode1->tunnel,"TC")) {
+                printf("%d)x: %d Y: %d\n",count,tmpnode1->x,tmpnode1->y);
+
+                opentunnel_tmp_node = lights_swap_append(&opentunnel);
+                opentunnel_tmp_node->x = tmpnode1->x;
+                opentunnel_tmp_node->y = tmpnode1->y;
+
+                ++count;
+            }
+            tmpnode1 = tmpnode1->next;
+        }
+        count = 1;
+        opentunnel_tmp_node = opentunnel;
+        tmpnode1 = first_m;
+
+        printf("Which tunnel do you want to open?\n");
+        scanf("%d",&tmp);
+        for (int j = 1; j < tmp; ++j) {
+            opentunnel_tmp_node = opentunnel_tmp_node->next;
+        }
+
+        while(tmpnode1 != NULL) {
+            if(tmpnode1->x == opentunnel_tmp_node->x && tmpnode1->y == opentunnel_tmp_node->y) {
+                xasli = tmpnode1->x;
+                yasli = tmpnode1->y;
+                tmpnode1->tunnel = "TO";
+            }
+            tmpnode1 = tmpnode1->next;
+        }
+
+        printf("Open tunnels :\n");
+        while(tmpnode2 != NULL) {
+            if(!strcmp(tmpnode2->tunnel,"TO") && (tmpnode2->x != xasli || tmpnode2->y != yasli)) {
+                printf("%d)x: %d Y: %d\n",count,tmpnode2->x,tmpnode2->y);
+
+                Closetunnel_tmp_node = lights_swap_append(&Closetunnel);
+                Closetunnel_tmp_node->x = tmpnode2->x;
+                Closetunnel_tmp_node->y = tmpnode2->y;
+
+                ++count;
+            }
+            tmpnode2 = tmpnode2->next;
+        }
+        tmpnode2 = first_m;
+        Closetunnel_tmp_node = Closetunnel;
+
+        printf("Which tunnel do you want to close?\n");
+        scanf("%d",&tmp);
+        for (int j = 1; j < tmp; ++j) {
+            Closetunnel_tmp_node = Closetunnel_tmp_node->next;
+        }
+
+        while(tmpnode2 != NULL) {
+            if(tmpnode2->x == Closetunnel_tmp_node->x && tmpnode2->y == Closetunnel_tmp_node->y) {
+                tmpnode2->tunnel = "TC";
+            }
+            tmpnode2 = tmpnode2->next;
+        }
     }
 }

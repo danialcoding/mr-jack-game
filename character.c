@@ -135,12 +135,10 @@ void choose_move_abl(struct characters *character_ptr,int card_number,struct map
             printf("Move:\n");
             card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
             printf("Ability:\n");
-            ///problem
             card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y);
         }
         else if(user_choose == 2) {
             printf("Ability:\n");
-            ///problem
             card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y);
             printf("Move:\n");
             card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
@@ -151,7 +149,6 @@ void choose_move_abl(struct characters *character_ptr,int card_number,struct map
         printf("Move:\n");
         card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
         printf("Ability:\n");
-        ///problem
         card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y);
         printf("\n");
     }
@@ -162,7 +159,6 @@ void choose_move_abl(struct characters *character_ptr,int card_number,struct map
             card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
         }
         else if(user_choose == 2) {
-            ///problem
             card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y);
         }
         printf("\n");

@@ -19,6 +19,7 @@ struct map* map_append(struct map** head) {
     last->next = new_node;
     return new_node;
 }
+
 struct out_tunnel* out_tunnel_append(struct out_tunnel** head) {
 
     struct out_tunnel *new_node = (struct out_tunnel*) malloc(sizeof(struct out_tunnel));

@@ -18,6 +18,7 @@ struct characters {
     int number;
     char *info;
     char *ability_time;
+    char *SG_ability_Direction;
     struct characters* next;
 };
 struct out_tunnel {

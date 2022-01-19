@@ -692,5 +692,27 @@ void card_ability(struct characters *character_ptr,struct characters *character_
         }
     }
 
-    
+    else if(!strcmp(character_ptr->name,"JW")) {
+
+        char *user_choose = malloc(2 * sizeof(char));
+
+        printf("You can do 3 move (up = U , down = D , right = R , left = L).\n");
+        scanf("%s",user_choose);
+
+        if(!strcmp(user_choose,"U")) {
+            character_ptr->SG_ability_Direction = "U";
+        }
+        else if(!strcmp(user_choose,"D")) {
+            character_ptr->SG_ability_Direction = "D";
+        }
+        else if(!strcmp(user_choose,"R")) {
+            character_ptr->SG_ability_Direction = "R";
+        }
+        else if(!strcmp(user_choose,"L")) {
+            character_ptr->SG_ability_Direction = "L";
+        }
+        else {
+            card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y);
+        }
+    }
 }

@@ -1,13 +1,13 @@
-struct lights_swap {
+struct swap_ability {
     int x;
     int y;
-    struct lights_swap *next;
+    struct swap_ability *next;
 };
-struct lights_swap* lights_swap_append(struct lights_swap** head) {
+struct swap_ability* lights_swap_append(struct swap_ability** head) {
 
-    struct lights_swap *new_node = (struct lights_swap*) malloc(sizeof(struct lights_swap));
+    struct swap_ability *new_node = (struct swap_ability*) malloc(sizeof(struct swap_ability));
 
-    struct lights_swap *last = *head;
+    struct swap_ability *last = *head;
 
     new_node->next = NULL;
 
@@ -23,7 +23,6 @@ struct lights_swap* lights_swap_append(struct lights_swap** head) {
     last->next = new_node;
     return new_node;
 }
-
 int rand_num_SH(int jack_num) {
     int tmp;
     srand(time(0));
@@ -67,10 +66,10 @@ void card_ability(struct characters *character_ptr,struct characters *character_
         printf("%s character is not jack.\n",tmp_character_ptr->name);
     }
     else if(!strcmp(character_ptr->name,"JS")) {
-        struct lights_swap *lighton = NULL;
-        struct lights_swap *lighton_tmp_node = NULL;
-        struct lights_swap *lightoff = NULL;
-        struct lights_swap *lightoff_tmp_node = NULL;
+        struct swap_ability *lighton = NULL;
+        struct swap_ability *lighton_tmp_node = NULL;
+        struct swap_ability *lightoff = NULL;
+        struct swap_ability *lightoff_tmp_node = NULL;
         int tmp,count = 1,xasli,yasli;
 
         printf("Lights on :\n");

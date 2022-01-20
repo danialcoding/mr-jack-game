@@ -681,7 +681,7 @@ void card_ability(struct characters *character_ptr,struct characters *character_
             tmpnode1 = first_m;
             characters_tmp_node = characters_loc;
 
-            printf("you want replace WG with wich character?\n");
+            printf("Choose your character to move:\n");
             scanf("%d",&tmp);
             for (int j = 1; j < tmp; ++j) {
                 characters_tmp_node = characters_tmp_node->next;
@@ -696,7 +696,7 @@ void card_ability(struct characters *character_ptr,struct characters *character_
 
         char *user_choose = malloc(2 * sizeof(char));
 
-        printf("You can do 3 move (up = U , down = D , right = R , left = L).\n");
+        printf("Select the direction of the flashlight (up = U , down = D , right = R , left = L):\n");
         scanf("%s",user_choose);
 
         if(!strcmp(user_choose,"U")) {

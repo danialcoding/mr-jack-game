@@ -1,4 +1,4 @@
-void rounds_menu(struct map *fmap,int road_x,int road_y,struct characters *character_ptr,int rounds,struct out_tunnel *tunnel_out_ptr);
+void rounds_menu(struct map *fmap,int road_x,int road_y,struct characters *character_ptr,int rounds,struct out_tunnel *tunnel_out_ptr,int *ptr_card_array);
 
 
 void start_menu(struct map *fmap,int road_x,int road_y,struct characters *character_ptr,int rounds,struct out_tunnel *tunnel_out_ptr) {
@@ -14,16 +14,16 @@ void start_menu(struct map *fmap,int road_x,int road_y,struct characters *charac
 
         ptr_card_array = rand_cards(rounds);
 
-        show_character(ptr_card_array,rounds,character_ptr);
-
         first_map_ptr = read_map(fmap,road_x,road_y);
 
-        play_rounds(ptr_card_array,rounds,character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
+        printf("\n");
 
+        play_rounds(ptr_card_array,rounds,character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
+        ++rounds;
         /// chaeck light - jack maree
 
         for (; rounds <= 8; ++rounds) {
-            rounds_menu(first_map_ptr,road_x,road_y,character_ptr,rounds,tunnel_out_ptr);
+            rounds_menu(first_map_ptr,road_x,road_y,character_ptr,rounds,tunnel_out_ptr,ptr_card_array);
         }
     }
     else if(tmp == 2) {
@@ -37,23 +37,27 @@ void start_menu(struct map *fmap,int road_x,int road_y,struct characters *charac
     }
 }
 
-void rounds_menu(struct map *fmap,int road_x,int road_y,struct characters *character_ptr,int rounds,struct out_tunnel *tunnel_out_ptr) {
+void rounds_menu(struct map *fmap,int road_x,int road_y,struct characters *character_ptr,int rounds,struct out_tunnel *tunnel_out_ptr,int *ptr_card_array) {
     int tmp;
-    int *ptr_card_array = NULL;
+    //int *ptr_card_array = NULL;
     struct map *first_map_ptr = fmap;
 
     printf("Do you continue or save the game?\n");
     printf("1)continue \n2)Save\n3)Exit\n");
     scanf("%d",&tmp);
     if(tmp == 1) {
-        /// chaeck light - jack maree - egra ghavanin ebtedaye round masala bardashtan cheragh
-        ptr_card_array = rand_cards(rounds);
-
-        show_character(ptr_card_array,rounds,character_ptr);
+        /// egra ghavanin ebtedaye round masala bardashtan cheragh
+        if(rounds % 2 == 1) {
+            ptr_card_array = rand_cards(rounds);
+        }
 
         print_map(fmap,road_x,road_y);
 
+        printf("\n");
+
         play_rounds(ptr_card_array,rounds,character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
+        /// chaeck light - jack maree
+        printf("\n");
     }
     else if(tmp == 2) {
         ///problem
@@ -63,6 +67,6 @@ void rounds_menu(struct map *fmap,int road_x,int road_y,struct characters *chara
     }
     else {
         ///problem
-        rounds_menu(first_map_ptr,road_x,road_y,character_ptr,rounds,tunnel_out_ptr);
+        rounds_menu(first_map_ptr,road_x,road_y,character_ptr,rounds,tunnel_out_ptr,ptr_card_array);
     }
 }

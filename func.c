@@ -64,22 +64,31 @@ void rand_select_jack(struct characters *character_ptr) {
     }
 }
 
-int * rand_cards(int rounds) {
+int * rand_cards() {
     int tmp,r;
     static int card_array[8];
-    if(rounds % 2 == 1) {
-        srand(time(0));
-        for (int i = 0; i < 8; ++i) {
-            card_array[i] = i + 1;
-        }
-        for(int i = 7;i > 0; i--){
-            r = rand() % i;
-            tmp = card_array[i];
-            card_array[i] = card_array[r];
-            card_array[r] = tmp;
-        }
-        return card_array;
+
+    srand(time(0));
+    for (int i = 0; i < 8; ++i) {
+        card_array[i] = i + 1;
     }
+    for(int i = 7;i > 0; i--){
+        r = rand() % i;
+        tmp = card_array[i];
+        card_array[i] = card_array[r];
+        card_array[r] = tmp;
+    }
+
+    return card_array;
+
+}
+
+void check_lighting() {
+
+}
+
+void jack_check_visible() {
+
 }
 
 void win_func() {

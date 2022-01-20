@@ -85,6 +85,7 @@ struct characters* create_caracter_info(struct characters *character_ptr) {
 
 void show_character(int *ptr_card_array,int rounds,struct characters *character_ptr) {
     struct characters *first = character_ptr;
+
     if(rounds % 2 == 1) {
         for (int i = 0; i < 4; ++i) {
             while(character_ptr != NULL) {

@@ -6,9 +6,11 @@ int repetition(int i,int *array,int tmp) {
         if(array[j] == array[i]) {
             printf("The card you selected is a duplicate. Select another card :\n");
             scanf("%d",&tmp);
-            repetition(i,array,tmp);
+            tmp = repetition(i,array,tmp);
+            return tmp;
         }
     }
+    return tmp;
 }
 
 void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr,struct map *first_map_ptr,struct out_tunnel *tunnel_out_ptr,int road_x,int road_y) {
@@ -23,7 +25,7 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
         printf("choose a card and type card number :\n");
         scanf("%d",&tmp);
 
-        repetition(i,array,tmp);
+        tmp = repetition(i,array,tmp);
 
         n = tmp - 1;
         n = *(ptr_card_array + n);
@@ -38,7 +40,7 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
         printf("choose a card and type card number :\n");
         scanf("%d",&tmp);
 
-        repetition(i,array,tmp);
+        tmp = repetition(i,array,tmp);
 
         n = tmp - 1;
         n = *(ptr_card_array + n);
@@ -53,7 +55,7 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
         printf("choose a card and type card number :\n");
         scanf("%d",&tmp);
 
-        repetition(i,array,tmp);
+        tmp = repetition(i,array,tmp);
 
         n = tmp - 1;
         n = *(ptr_card_array + n);
@@ -68,7 +70,7 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
         printf("choose a card and type card number :\n");
         scanf("%d",&tmp);
 
-        repetition(i,array,tmp);
+        tmp = repetition(i,array,tmp);
 
         n = tmp - 1;
         n = *(ptr_card_array + n);

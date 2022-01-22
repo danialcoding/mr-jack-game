@@ -83,7 +83,169 @@ int * rand_cards() {
 
 }
 
-void check_lighting() {
+void check_lighting(struct map *first_map_ptr2,struct characters *character_ptr,int road_x,int road_y) {
+    struct map *tmp_node1 = first_map_ptr2;
+    struct map *tmp_node2 = first_map_ptr2;
+    struct map *tmp_node3 = first_map_ptr2;
+    struct characters *tmp_char = character_ptr;
+
+
+    while(tmp_node1 != NULL) {
+        tmp_node1->Lighting = 0;
+        tmp_node1 = tmp_node1->next;
+    }
+
+    tmp_node1 = first_map_ptr2;
+
+    while(tmp_node1 != NULL) {
+
+        if(!strcmp(tmp_node1->person1,"JW")) {
+            int xi = 1;
+            int yj = 1;
+
+            while(tmp_char != NULL) {
+                if(!strcmp(tmp_char->name,"JW")) {
+                    break;
+                }
+                tmp_char = tmp_char->next;
+            }
+
+            if(!strcmp(tmp_char->SG_ability_Direction,"U")) {
+                while (tmp_node2 != NULL) {
+
+                    while(tmp_node3 != NULL) {
+                        if(tmp_node3->x == tmp_node1->x && tmp_node3->y == tmp_node1->y + yj) {
+                            break;
+                        }
+                        tmp_node3 = tmp_node3->next;
+                    }
+
+                    if (tmp_node2->x == tmp_node1->x && tmp_node2->y == tmp_node1->y + yj && !(!strcmp(tmp_node3->home,"HM")) && tmp_node3->y <= road_y - 1) {
+                        tmp_node2->Lighting = 1;
+                        ++yj;
+                        tmp_node2 = first_map_ptr2;
+                        tmp_node3 = first_map_ptr2;
+                    }
+                    else if(!strcmp(tmp_node3->home,"HM")) {
+                        break;
+                    }
+                    tmp_node2 = tmp_node2->next;
+                }
+            }
+            else if(!strcmp(tmp_char->SG_ability_Direction,"D")) {
+                while (tmp_node2 != NULL) {
+
+                    while(tmp_node3 != NULL) {
+                        if(tmp_node3->x == tmp_node1->x && tmp_node3->y == abs(tmp_node1->y - yj)) {
+                            break;
+                        }
+                        tmp_node3 = tmp_node3->next;
+                    }
+
+                    if (tmp_node2->x == tmp_node1->x && tmp_node2->y == abs(tmp_node1->y - yj) && !(!strcmp(tmp_node3->home,"HM")) && tmp_node3->y >= 0) {
+                        tmp_node2->Lighting = 1;
+                        ++yj;
+                        tmp_node2 = first_map_ptr2;
+                        tmp_node3 = first_map_ptr2;
+                    }
+                    else if(!strcmp(tmp_node3->home,"HM")) {
+                        break;
+                    }
+                    tmp_node2 = tmp_node2->next;
+                }
+            }
+            else if(!strcmp(tmp_char->SG_ability_Direction,"R")) {
+                while (tmp_node2 != NULL) {
+
+                    while(tmp_node3 != NULL) {
+                        if(tmp_node3->x == tmp_node1->x + xi && tmp_node3->y == tmp_node1->y) {
+                            break;
+                        }
+                        tmp_node3 = tmp_node3->next;
+                    }
+
+                    if (tmp_node2->x == tmp_node1->x + xi && tmp_node2->y == tmp_node1->y && !(!strcmp(tmp_node3->home,"HM")) && tmp_node3->x <= road_x - 1) {
+                        tmp_node2->Lighting = 1;
+                        ++xi;
+                        tmp_node2 = first_map_ptr2;
+                        tmp_node3 = first_map_ptr2;
+                    }
+                    else if(!strcmp(tmp_node3->home,"HM")) {
+                        break;
+                    }
+                    tmp_node2 = tmp_node2->next;
+                }
+            }
+            else if(!strcmp(tmp_char->SG_ability_Direction,"L")) {
+                while (tmp_node2 != NULL) {
+
+                    while(tmp_node3 != NULL) {
+                        if(tmp_node3->x == abs(tmp_node1->x - xi) && tmp_node3->y == tmp_node1->y) {
+                            break;
+                        }
+                        tmp_node3 = tmp_node3->next;
+                    }
+
+                    if (tmp_node2->x == abs(tmp_node1->x - xi) && tmp_node2->y == tmp_node1->y && !(!strcmp(tmp_node3->home,"HM")) && tmp_node3->x >= 0) {
+                        tmp_node2->Lighting = 1;
+                        ++xi;
+                        tmp_node2 = first_map_ptr2;
+                        tmp_node3 = first_map_ptr2;
+                    }
+                    else if(!strcmp(tmp_node3->home,"HM")) {
+                        break;
+                    }
+                    tmp_node2 = tmp_node2->next;
+                }
+            }
+        }
+
+        tmp_node2 = first_map_ptr2;
+
+        if(!(!strcmp(tmp_node1->person1,"NN"))) {
+            while (tmp_node2 != NULL) {
+                if (tmp_node2->x == tmp_node1->x - 1 && tmp_node2->y == tmp_node1->y) {
+                    tmp_node2->Lighting = 1;
+                }
+                else if(tmp_node2->x == tmp_node1->x + 1 && tmp_node2->y == tmp_node1->y) {
+                    tmp_node2->Lighting = 1;
+                }
+                else if(tmp_node2->x == tmp_node1->x && tmp_node2->y == tmp_node1->y + 1) {
+                    tmp_node2->Lighting = 1;
+                }
+                else if(tmp_node2->x == tmp_node1->x && tmp_node2->y == tmp_node1->y - 1) {
+                    tmp_node2->Lighting = 1;
+                }
+                tmp_node2 = tmp_node2->next;
+            }
+        }
+
+        else if(!strcmp(tmp_node1->light,"LN")) {
+            while (tmp_node2 != NULL) {
+                if (tmp_node2->x == tmp_node1->x - 1 && tmp_node2->y == tmp_node1->y) {
+                    tmp_node2->Lighting = 1;
+                }
+                else if(tmp_node2->x == tmp_node1->x + 1 && tmp_node2->y == tmp_node1->y) {
+                    tmp_node2->Lighting = 1;
+                }
+                else if(tmp_node2->x == tmp_node1->x && tmp_node2->y == tmp_node1->y + 1) {
+                    tmp_node2->Lighting = 1;
+                }
+                else if(tmp_node2->x == tmp_node1->x && tmp_node2->y == tmp_node1->y - 1) {
+                    tmp_node2->Lighting = 1;
+                }
+                tmp_node2 = tmp_node2->next;
+            }
+        }
+
+
+        tmp_node2 = first_map_ptr2;
+        tmp_node3 = first_map_ptr2;
+        tmp_node1 = tmp_node1->next;
+    }
+
+
+    tmp_node2 = first_map_ptr2;
 
 }
 

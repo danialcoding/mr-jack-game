@@ -694,7 +694,7 @@ void card_ability(struct characters *character_ptr,struct characters *character_
 
     else if(!strcmp(character_ptr->name,"JW")) {
 
-        char *user_choose = malloc(2 * sizeof(char));
+        char *user_choose = (char *)malloc(2 * sizeof(char));
 
         printf("Select the direction of the flashlight (up = U , down = D , right = R , left = L):\n");
         scanf("%s",user_choose);

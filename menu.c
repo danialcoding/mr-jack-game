@@ -6,8 +6,11 @@ void start_menu(struct map *fmap,int road_x,int road_y,struct characters *charac
     int *ptr_card_array = NULL;
     struct map *first_map_ptr;
     struct map *first_map_ptr2;
+    struct map *first_map_ptr3;
+
     printf("1)Start \n2)Load\n3)Exit\n");
     scanf("%d",&tmp);
+
     if(tmp == 1) {
         character_ptr = create_caracter_info(character_ptr);
 
@@ -18,6 +21,7 @@ void start_menu(struct map *fmap,int road_x,int road_y,struct characters *charac
         first_map_ptr = read_map(fmap,road_x,road_y);
 
         first_map_ptr2 = first_map_ptr;
+        first_map_ptr3 = first_map_ptr;
 
         printf("\n");
 
@@ -25,7 +29,7 @@ void start_menu(struct map *fmap,int road_x,int road_y,struct characters *charac
 
         check_lighting(first_map_ptr2,character_ptr,road_x,road_y);
 
-        /// chaeck light - jack maree
+        jack_check_visible(first_map_ptr3,character_ptr);
 
         ++rounds;
 
@@ -47,12 +51,14 @@ void start_menu(struct map *fmap,int road_x,int road_y,struct characters *charac
 void rounds_menu(struct map *fmap,int road_x,int road_y,struct characters *character_ptr,int rounds,struct out_tunnel *tunnel_out_ptr,int *ptr_card_array) {
     int tmp;
     struct map *first_map_ptr = fmap;
+    struct map *first_map_ptr2 = fmap;
+    struct map *first_map_ptr3 = fmap;
 
     printf("Do you continue or save the game?\n");
     printf("1)continue \n2)Save\n3)Exit\n");
     scanf("%d",&tmp);
     if(tmp == 1) {
-        /// egra ghavanin ebtedaye round masala bardashtan cheragh
+
         if(rounds % 2 == 1) {
             ptr_card_array = rand_cards(rounds);
         }
@@ -62,8 +68,12 @@ void rounds_menu(struct map *fmap,int road_x,int road_y,struct characters *chara
         printf("\n");
 
         play_rounds(ptr_card_array,rounds,character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
-        /// chaeck light - jack maree
+
         printf("\n");
+
+        check_lighting(first_map_ptr2,character_ptr,road_x,road_y);
+
+        jack_check_visible(first_map_ptr3,character_ptr);
     }
     else if(tmp == 2) {
         ///problem
@@ -73,6 +83,7 @@ void rounds_menu(struct map *fmap,int road_x,int road_y,struct characters *chara
     }
     else {
         ///problem
+        ///test shavad
         rounds_menu(first_map_ptr,road_x,road_y,character_ptr,rounds,tunnel_out_ptr,ptr_card_array);
     }
 }

@@ -198,7 +198,7 @@ void card_movement(struct characters *character_ptr,struct map *first_map_ptr,st
                 character_ptr = first_ch;
             }
             else{
-                come_back(xasli,yasli,character_ptr->name,first_m,T2);
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
                 card_movement(character_ptr,first_m,tunnel_out_ptr,road_x,road_y);
                 return;
             }

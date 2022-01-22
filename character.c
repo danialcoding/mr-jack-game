@@ -3,7 +3,7 @@ struct characters c_sg,c_sh,c_jw,c_ms,c_js,c_jb,c_wg,c_il;
 void card_movement(struct characters *character_ptr,struct map *fmap,struct out_tunnel *tunnel_out_ptr,int road_x,int road_y);
 void card_movement_ms(struct characters *character_ptr,struct map *first_map_ptr,struct out_tunnel *tunnel_out_ptr,int road_x,int road_y);
 void come_back(int xasli,int yasli,char *character_name,struct map *first_m,int *T2);
-void card_ability(struct characters *character_ptr,struct characters *character_ptr_head,struct map *first_map_ptr,int road_x,int road_y);
+void card_ability(struct characters *character_ptr,struct characters *character_ptr_head,struct map *first_map_ptr,int road_x,int road_y,int rounds);
 
 struct characters* create_caracter_info(struct characters *character_ptr) {
     character_ptr = &c_sg;
@@ -34,6 +34,7 @@ struct characters* create_caracter_info(struct characters *character_ptr) {
     c_jw.next = &c_ms;
     c_jw.info = "After moving, he determines the direction of his flashlight";
     c_jw.ability_time = "NX";
+    c_jw.SG_ability_Direction = "N";
 
     /** MS **/
     c_ms.name = "MS";
@@ -108,17 +109,18 @@ void show_character(int *ptr_card_array,int rounds,struct characters *character_
                 }
                 character_ptr = character_ptr->next;
             }
-            printf("%d)character %s\n",i+1,character_ptr->name);
+            printf("%d)character %s\n",i-3,character_ptr->name);
             printf("Move 1 to %d houses.\n",character_ptr->move);
-            printf("%s.\n",character_ptr->info);
+            printf("%s.\n\n",character_ptr->info);
             character_ptr = first;
         }
     }
 }
 
-void choose_move_abl(struct characters *character_ptr,int card_number,struct map *first_map_ptr,struct out_tunnel *tunnel_out_ptr,int road_x,int road_y) {
+void choose_move_abl(struct characters *character_ptr,int card_number,struct map *first_map_ptr,struct out_tunnel *tunnel_out_ptr,int road_x,int road_y,int rounds) {
     struct characters *character_ptr_head = character_ptr;
     struct characters *first = character_ptr;
+
     while(character_ptr != NULL) {
         if(character_ptr->number == card_number) {
             break;
@@ -136,11 +138,11 @@ void choose_move_abl(struct characters *character_ptr,int card_number,struct map
             printf("Move:\n");
             card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
             printf("Ability:\n");
-            card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y);
+            card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y,rounds);
         }
         else if(user_choose == 2) {
             printf("Ability:\n");
-            card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y);
+            card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y,rounds);
             printf("Move:\n");
             card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
         }
@@ -150,7 +152,7 @@ void choose_move_abl(struct characters *character_ptr,int card_number,struct map
         printf("Move:\n");
         card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
         printf("Ability:\n");
-        card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y);
+        card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y,rounds);
         printf("\n");
     }
     else if(!strcmp(tmp_move,"OR")) {
@@ -160,7 +162,7 @@ void choose_move_abl(struct characters *character_ptr,int card_number,struct map
             card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
         }
         else if(user_choose == 2) {
-            card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y);
+            card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y,rounds);
         }
         printf("\n");
     }

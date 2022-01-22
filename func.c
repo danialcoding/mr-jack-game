@@ -44,23 +44,23 @@ struct out_tunnel* out_tunnel_append(struct out_tunnel** head) {
 int random_num_1_8() {
     int tmp;
     srand(time(0));
-    tmp = rand() % 9;
-    if(tmp == 0) {
-        tmp = tmp + 1;
-    }
+    tmp = rand() % 8 + 1;
+
     return tmp;
 }
 
 void rand_select_jack(struct characters *character_ptr) {
     int tmp;
+    struct characters *first = character_ptr;
     tmp = random_num_1_8();
+
     for (int i = 0; i < 8; ++i) {
-        if(character_ptr->number == tmp) {
-            printf("jack is : %s\n\n",character_ptr->name);
-            character_ptr->jack = "YES";
+        if(first->number == tmp) {
+            printf("jack is : %s\n\n",first->name);
+            first->jack = "YES";
             return;
         }
-        character_ptr = character_ptr->next;
+        first = first->next;
     }
 }
 
@@ -198,9 +198,12 @@ void check_lighting(struct map *first_map_ptr2,struct characters *character_ptr,
                     tmp_node2 = tmp_node2->next;
                 }
             }
-        }
+            else{
 
-        tmp_node2 = first_map_ptr2;
+            }
+
+            tmp_node2 = first_map_ptr2;
+        }
 
         if(!(!strcmp(tmp_node1->person1,"NN"))) {
             while (tmp_node2 != NULL) {
@@ -238,19 +241,37 @@ void check_lighting(struct map *first_map_ptr2,struct characters *character_ptr,
             }
         }
 
-
         tmp_node2 = first_map_ptr2;
         tmp_node3 = first_map_ptr2;
         tmp_node1 = tmp_node1->next;
     }
 
-
-    tmp_node2 = first_map_ptr2;
-
 }
 
-void jack_check_visible() {
+void jack_check_visible(struct map *first_map_ptr3,struct characters *character_ptr) {
+    struct map *tmp_node1 = first_map_ptr3;
+    struct characters *first_char = character_ptr;
 
+    while(first_char != NULL) {
+        if(!strcmp(first_char->jack,"YES")) {
+            break;
+        }
+        first_char = first_char->next;
+    }
+
+    while(tmp_node1 != NULL) {
+        if(!strcmp(tmp_node1->person1,first_char->name)) {
+            break;
+        }
+        tmp_node1 = tmp_node1->next;
+    }
+
+    if(tmp_node1->Lighting == 1) {
+        printf("Jack is visible.\n");
+    }
+    else {
+        printf("Jack is invisible.\n");
+    }
 }
 
 void win_func() {

@@ -54,18 +54,23 @@ struct swap_ability_char* lights_swap_append(struct swap_ability_char** head) {
     return new_node;
 }
 
-int rand_num_SH(int jack_num) {
+int rand_num_SH(int jack_num,int *array,int i) {
     int tmp;
+
     srand(time(0));
-    tmp = rand() % 9;
-    if(tmp == 0) {
-        tmp = tmp + 1;
-    }
+    tmp = rand() % 8 + 1;
 
     if(tmp == jack_num) {
-        return rand_num_SH(jack_num);
+        sleep(1);
+        return rand_num_SH(jack_num,array,i);
     }
+    array[i] = tmp;
 
+    for (int j = 0; j < i; ++j) {
+        if(array[j] == array[i]) {
+            return rand_num_SH(jack_num,array,i);
+        }
+    }
     return tmp;
 }
 
@@ -364,7 +369,7 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
 }
 
 
-void card_ability(struct characters *character_ptr,struct characters *character_ptr_head,struct map *first_map_ptr,int road_x,int road_y) {
+void card_ability(struct characters *character_ptr,struct characters *character_ptr_head,struct map *first_map_ptr,int road_x,int road_y,int rounds) {
     struct map *first_m = first_map_ptr;
     struct map *tmpnode1 = first_map_ptr;
     struct map *tmpnode2 = first_map_ptr;
@@ -374,7 +379,10 @@ void card_ability(struct characters *character_ptr,struct characters *character_
     if(!strcmp(character_ptr->name,"SH")) {
         struct characters *jack_ptr = character_ptr_head;
         struct characters *tmp_character_ptr = character_ptr_head;
+        int tmp;
         int number;
+        int *array = malloc(8 * sizeof(int));
+
         while(jack_ptr != NULL) {
             if(!strcmp(jack_ptr->jack,"YES")) {
                 break;
@@ -382,7 +390,14 @@ void card_ability(struct characters *character_ptr,struct characters *character_
             jack_ptr = jack_ptr->next;
         }
 
-        number = rand_num_SH(jack_ptr->number);
+        if(rounds % 2 == 0) {
+            tmp = rounds/2;
+        }
+        else {
+            tmp = ((int)(rounds/2)) + 1;
+        }
+
+        number = rand_num_SH(jack_ptr->number,array,tmp);
 
         while(tmp_character_ptr != NULL) {
             if(tmp_character_ptr->number == number) {
@@ -712,7 +727,7 @@ void card_ability(struct characters *character_ptr,struct characters *character_
             character_ptr->SG_ability_Direction = "L";
         }
         else {
-            card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y);
+            card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y,rounds);
         }
     }
 }

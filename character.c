@@ -16,6 +16,7 @@ struct characters* create_caracter_info(struct characters *character_ptr) {
     c_sg.next = &c_sh;
     c_sg.info = "After whistling, he brings the game characters closer to him in a total of three moves";
     c_sg.ability_time = "NP";
+    c_sg.SG_ability_Direction = "N";
 
     /** SH **/
     c_sh.name = "SH";
@@ -25,6 +26,7 @@ struct characters* create_caracter_info(struct characters *character_ptr) {
     c_sh.next = &c_jw;
     c_sh.info = "He picks up one of Jack's cards and sees it";
     c_sh.ability_time = "NX";
+    c_sh.SG_ability_Direction = "N";
 
     /** JW **/
     c_jw.name = "JW";
@@ -44,6 +46,7 @@ struct characters* create_caracter_info(struct characters *character_ptr) {
     c_ms.next = &c_js;
     c_ms.info = "He can pass through empty houses when he is on the move";
     c_ms.ability_time = "IN";
+    c_ms.SG_ability_Direction = "N";
 
     /** JS **/
     c_js.name = "JS";
@@ -53,6 +56,7 @@ struct characters* create_caracter_info(struct characters *character_ptr) {
     c_js.next = &c_jb;
     c_js.info = "He should turn off one light and turn on another light";
     c_js.ability_time = "NP";
+    c_js.SG_ability_Direction = "N";
 
     /** JB **/
     c_jb.name = "JB";
@@ -62,6 +66,7 @@ struct characters* create_caracter_info(struct characters *character_ptr) {
     c_jb.next = &c_wg;
     c_jb.info = "He picks up one of the well covers and places it on another well";
     c_jb.ability_time = "NP";
+    c_jb.SG_ability_Direction = "N";
 
     /** WG **/
     c_wg.name = "WG";
@@ -71,6 +76,7 @@ struct characters* create_caracter_info(struct characters *character_ptr) {
     c_wg.next = &c_il;
     c_wg.info = "He can move or change places with another character";
     c_wg.ability_time = "OR";
+    c_wg.SG_ability_Direction = "N";
 
     /** IL **/
     c_il.name = "IL";
@@ -80,6 +86,7 @@ struct characters* create_caracter_info(struct characters *character_ptr) {
     c_il.next = NULL;
     c_il.info = "He must pick up one of the blocking tokens and place it on the other exit";
     c_il.ability_time = "NP";
+    c_il.SG_ability_Direction = "N";
 
     return character_ptr;
 }

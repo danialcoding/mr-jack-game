@@ -24,6 +24,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "NN";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 1) {
                 tmp_node->road = "NN";
@@ -33,6 +34,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "NN";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 2){
                 tmp_node->road = "NN";
@@ -42,6 +44,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "NN";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 3){
                 tmp_node->road = "RD";
@@ -51,6 +54,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "NN";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 4){
                 tmp_node->road = "RD";
@@ -60,6 +64,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "NN";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "EO";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 5){
                 tmp_node->road = "NN";
@@ -69,6 +74,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "NN";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 22){
                 tmp_node->road = "NN";
@@ -78,6 +84,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "NN";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 33){
                 tmp_node->road = "RD";
@@ -87,6 +94,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "NN";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 44){
                 tmp_node->road = "NN";
@@ -96,6 +104,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "NN";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "EC";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 11){
                 tmp_node->road = "RD";
@@ -105,6 +114,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "SG";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 12){
                 tmp_node->road = "RD";
@@ -114,6 +124,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "SH";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 13){
                 tmp_node->road = "RD";
@@ -123,6 +134,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "JW";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 14){
                 tmp_node->road = "RD";
@@ -132,6 +144,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "MS";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 15){
                 tmp_node->road = "RD";
@@ -141,6 +154,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "JS";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 16){
                 tmp_node->road = "RD";
@@ -150,6 +164,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "JB";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 17){
                 tmp_node->road = "RD";
@@ -159,6 +174,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "WG";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             else if(tmp == 18){
                 tmp_node->road = "RD";
@@ -168,6 +184,7 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
                 tmp_node->person1 = "IL";
                 tmp_node->person2 = "NN";
                 tmp_node->exit = "NN";
+                tmp_node->Lighting = 0;
             }
             tmp_node->x = j;
             tmp_node->y = i;

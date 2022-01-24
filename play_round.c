@@ -18,7 +18,9 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
     int array[4];
     int i = 0;
     int inspector_turn;
+    struct characters *first_char_ptr = character_ptr;
     struct map *first_mptr2 = first_map_ptr;
+    struct map *first_mptr3 = first_map_ptr;
 
     if(rounds % 2 == 1) {
         show_character(ptr_card_array,rounds,character_ptr);
@@ -36,6 +38,9 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         ++i;
+        win_func(first_char_ptr,first_mptr3);
+
+
 
         show_character(ptr_card_array,rounds,character_ptr);
         printf("jack turn.\n");
@@ -52,6 +57,9 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         ++i;
+        win_func(first_char_ptr,first_mptr3);
+
+
 
         show_character(ptr_card_array,rounds,character_ptr);
         printf("jack turn.\n");
@@ -68,6 +76,9 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         ++i;
+        win_func(first_char_ptr,first_mptr3);
+
+
 
         show_character(ptr_card_array,rounds,character_ptr);
         printf("Inspector turn.\n");
@@ -84,6 +95,7 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         ++i;
+        win_func(first_char_ptr,first_mptr3);
     }
     else {
         show_character(ptr_card_array,rounds,character_ptr);
@@ -101,6 +113,9 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         ++i;
+        win_func(first_char_ptr,first_mptr3);
+
+
 
         show_character(ptr_card_array,rounds,character_ptr);
         printf("Inspector turn.\n");
@@ -117,6 +132,9 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         ++i;
+        win_func(first_char_ptr,first_mptr3);
+
+
 
         show_character(ptr_card_array,rounds,character_ptr);
         printf("Inspector turn.\n");
@@ -133,6 +151,9 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         ++i;
+        win_func(first_char_ptr,first_mptr3);
+
+
 
         show_character(ptr_card_array,rounds,character_ptr);
         printf("jack turn.\n");
@@ -149,5 +170,6 @@ void play_rounds(int *ptr_card_array,int rounds,struct characters *character_ptr
         print_map(first_map_ptr,road_x,road_y);
         first_map_ptr = first_mptr2;
         ++i;
+        win_func(first_char_ptr,first_mptr3);
     }
 }

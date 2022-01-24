@@ -191,4 +191,9 @@ void rounds_menu(struct map *fmap,int road_x,int road_y,struct characters *chara
             rounds_menu(first_map_ptr,road_x,road_y,character_ptr,rounds,tunnel_out_ptr,ptr_card_array);
         }
     }
+    
+    if(rounds == 8) {
+        printf("\njack wins.\n");
+        exit(0);
+    }
 }

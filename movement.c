@@ -904,7 +904,6 @@ void card_movement_ms(struct characters *character_ptr,struct map *first_map_ptr
     tow_character_inone_ms(character_ptr,tmpnode1,tmpnode2,yasli,xasli,tunnel_out_ptr,&T2,road_x,road_y);
 }
 
-///problem add Inspector ability and add to play rounds Inspector turn
 
 void card_movement_Inspector(struct characters *character_ptr,struct map *first_map_ptr,struct out_tunnel *tunnel_out_ptr,int road_x,int road_y,struct characters *first_character_ptr) {
     char *choose_move = malloc(2 * sizeof(char));

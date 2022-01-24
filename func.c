@@ -296,6 +296,27 @@ void jack_check_visible(struct map *first_map_ptr3,struct characters *character_
     }
 }
 /// add if jack out win and if next 8 rounds jack win
-void win_func() {
-    /// next every move should run it
+
+void win_func(struct characters *character_ptr,struct map *first_map_ptr) {
+    struct characters *first_char = character_ptr;
+    struct map *tmpnode1 = first_map_ptr;
+
+    while(first_char != NULL) {
+        if(!strcmp(first_char->jack,"YES")) {
+            break;
+        }
+        first_char = first_char->next;
+    }
+
+    while(tmpnode1 != NULL) {
+        if(!strcmp(tmpnode1->person1,first_char->name)) {
+            break;
+        }
+        tmpnode1 = tmpnode1->next;
+    }
+
+    if(!strcmp(tmpnode1->exit,"EO")) {
+        printf("\njack wins.\n");
+        exit(0);
+    }
 }

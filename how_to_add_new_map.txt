@@ -1,0 +1,36 @@
+With the given numbers and guides, you can make a map 
+with dimensions of 13 by 9, but all the specified houses must be 
+in the specified number on the map.
+
+Special houses :
+whitechapel -> Custom number
+home -> Custom number
+open escape way -> 2
+close escape way -> 2
+lights on -> 6
+lights off -> 2
+Open tunnel -> 6
+Close tunnel -> 2
+
+
+Guide :
+Home : 1
+lights off : 2
+lights on : 22
+Open tunnel : 3
+Close tunnel : 33
+open escape way : 4
+close escape way : 44
+whitechapel : 5
+
+
+characters :
+SG : 11
+SH : 12
+JW : 13
+MS : 14
+JS : 15
+JB : 16
+WG : 17
+IL : 18
+

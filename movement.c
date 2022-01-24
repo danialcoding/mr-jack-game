@@ -1450,11 +1450,6 @@ void card_movement_Inspector_ms(struct characters *character_ptr,struct map *fir
         printf("move %d :",i+1);
         scanf("%s",choose_move);
 
-        for (int j = 0; j < 8; ++j) {
-            printf("%s\n",first_character_ptr->name);
-            first_character_ptr = first_character_ptr->next;
-        }
-
         if(!strcmp(choose_move,"T")) {
             while(tmpnode1 != NULL) {
                 if(!strcmp(tmpnode1->person1,character_ptr->name) || !strcmp(tmpnode1->person2,character_ptr->name)) {

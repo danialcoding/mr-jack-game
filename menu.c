@@ -113,6 +113,7 @@ void rounds_menu(struct map *fmap,int road_x,int road_y,struct characters *chara
         printf("1)continue \n2)Save\n3)Exit\n");
         scanf("%d",&tmp);
         if(tmp == 1) {
+            printf("\nround %d\n\n",rounds);
 
             if(rounds % 2 == 1) {
                 ptr_card_array = rand_cards(rounds);
@@ -191,9 +192,8 @@ void rounds_menu(struct map *fmap,int road_x,int road_y,struct characters *chara
             rounds_menu(first_map_ptr,road_x,road_y,character_ptr,rounds,tunnel_out_ptr,ptr_card_array);
         }
     }
-    
-    if(rounds == 8) {
-        printf("\njack wins.\n");
-        exit(0);
-    }
+
+    printf("\njack wins.\n");
+    exit(0);
+
 }

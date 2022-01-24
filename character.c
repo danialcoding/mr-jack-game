@@ -4,6 +4,8 @@ void card_movement(struct characters *character_ptr,struct map *fmap,struct out_
 void card_movement_ms(struct characters *character_ptr,struct map *first_map_ptr,struct out_tunnel *tunnel_out_ptr,int road_x,int road_y);
 void come_back(int xasli,int yasli,char *character_name,struct map *first_m,int *T2);
 void card_ability(struct characters *character_ptr,struct characters *character_ptr_head,struct map *first_map_ptr,int road_x,int road_y,int rounds);
+void card_movement_Inspector(struct characters *character_ptr,struct map *first_map_ptr,struct out_tunnel *tunnel_out_ptr,int road_x,int road_y,struct characters *first_character_ptr);
+void card_movement_Inspector_ms(struct characters *character_ptr,struct map *first_map_ptr,struct out_tunnel *tunnel_out_ptr,int road_x,int road_y,struct characters *first_character_ptr);
 
 struct characters* create_caracter_info(struct characters *character_ptr) {
     character_ptr = &c_sg;
@@ -124,8 +126,9 @@ void show_character(int *ptr_card_array,int rounds,struct characters *character_
     }
 }
 
-void choose_move_abl(struct characters *character_ptr,int card_number,struct map *first_map_ptr,struct out_tunnel *tunnel_out_ptr,int road_x,int road_y,int rounds) {
+void choose_move_abl(struct characters *character_ptr,int card_number,struct map *first_map_ptr,struct out_tunnel *tunnel_out_ptr,int road_x,int road_y,int rounds,int inspector_turn) {
     struct characters *character_ptr_head = character_ptr;
+    struct characters *first_character_ptr = character_ptr;
     struct characters *first = character_ptr;
 
     while(character_ptr != NULL) {
@@ -143,7 +146,12 @@ void choose_move_abl(struct characters *character_ptr,int card_number,struct map
         scanf("%d",&user_choose);
         if(user_choose == 1) {
             printf("Move:\n");
-            card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
+            if(inspector_turn == 1) {
+                card_movement_Inspector(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y,first_character_ptr);
+            }
+            else if(inspector_turn == 0){
+                card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
+            }
             printf("Ability:\n");
             card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y,rounds);
         }
@@ -151,13 +159,23 @@ void choose_move_abl(struct characters *character_ptr,int card_number,struct map
             printf("Ability:\n");
             card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y,rounds);
             printf("Move:\n");
-            card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
+            if(inspector_turn == 1) {
+                card_movement_Inspector(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y,first_character_ptr);
+            }
+            else if(inspector_turn == 0){
+                card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
+            }
         }
         printf("\n");
     }
     else if(!strcmp(tmp_move,"NX")) {
         printf("Move:\n");
-        card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
+        if(inspector_turn == 1) {
+            card_movement_Inspector(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y,first_character_ptr);
+        }
+        else if(inspector_turn == 0){
+            card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
+        }
         printf("Ability:\n");
         card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y,rounds);
         printf("\n");
@@ -166,7 +184,12 @@ void choose_move_abl(struct characters *character_ptr,int card_number,struct map
         printf("1)Move OR 2)ability\n");
         scanf("%d",&user_choose);
         if(user_choose == 1) {
-            card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
+            if(inspector_turn == 1) {
+                card_movement_Inspector(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y,first_character_ptr);
+            }
+            else if(inspector_turn == 0){
+                card_movement(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
+            }
         }
         else if(user_choose == 2) {
             card_ability(character_ptr,character_ptr_head,first_map_ptr,road_x,road_y,rounds);
@@ -175,7 +198,12 @@ void choose_move_abl(struct characters *character_ptr,int card_number,struct map
     }
     else if(!strcmp(tmp_move,"IN")) {
         printf("Move with ability :\n");
-        card_movement_ms(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
+        if(inspector_turn == 1) {
+            card_movement_Inspector_ms(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y,first_character_ptr);
+        }
+        else if(inspector_turn == 0){
+            card_movement_ms(character_ptr,first_map_ptr,tunnel_out_ptr,road_x,road_y);
+        }
         printf("\n");
     }
 

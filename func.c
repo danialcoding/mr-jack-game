@@ -299,33 +299,6 @@ void check_lighting(struct map *first_map_ptr2,struct characters *character_ptr,
                     ++xi;
                 }
 
-                /*
-                while (tmp_node2 != NULL) {
-
-                    while(tmp_node3 != NULL) {
-                        if(tmp_node3->x == tmp_node1->x + xi && tmp_node3->y == tmp_node1->y) {
-                            break;
-                        }
-                        tmp_node3 = tmp_node3->next;
-                    }
-
-                    if(tmp_node3 == NULL) {
-                        break;
-                    }
-
-                    if (tmp_node2->x == tmp_node1->x + xi && tmp_node2->y == tmp_node1->y && !(!strcmp(tmp_node3->home,"HM")) && tmp_node3->x <= road_x - 1) {
-                        tmp_node2->Lighting = 1;
-                        ++xi;
-                        tmp_node2 = first_map_ptr2;
-                    }
-                    else if(!strcmp(tmp_node3->home,"HM")) {
-                        break;
-                    }
-
-                    tmp_node3 = first_map_ptr2;
-                    tmp_node2 = tmp_node2->next;
-                }
-                 */
             }
             else if (!strcmp(tmp_char->SG_ability_Direction, "L")) {
 
@@ -349,37 +322,6 @@ void check_lighting(struct map *first_map_ptr2,struct characters *character_ptr,
                     ++xi;
                 }
 
-                /*
-                while (tmp_node2 != NULL) {
-
-                    while(tmp_node3 != NULL) {
-                        if(tmp_node3->x == abs(tmp_node1->x - xi) && tmp_node3->y == tmp_node1->y) {
-                            break;
-                        }
-                        tmp_node3 = tmp_node3->next;
-                    }
-
-                    if(tmp_node3 == NULL) {
-                        break;
-                    }
-
-                    if (tmp_node2->x == abs(tmp_node1->x - xi) && tmp_node2->y == tmp_node1->y && !(!strcmp(tmp_node3->home,"HM")) && tmp_node3->x >= 0) {
-                        tmp_node2->Lighting = 1;
-                        ++xi;
-                        tmp_node2 = first_map_ptr2;
-
-                    }
-                    else if(!strcmp(tmp_node3->home,"HM")) {
-                        break;
-                    }
-
-                    tmp_node3 = first_map_ptr2;
-                    tmp_node2 = tmp_node2->next;
-                }
-            }
-
-            tmp_node2 = first_map_ptr2;
-            */
             }
 
         }
@@ -480,20 +422,6 @@ void check_lighting(struct map *first_map_ptr2,struct characters *character_ptr,
         tmp_node2 = first_map_ptr2;
         tmp_node3 = first_map_ptr2;
         tmp_node1 = tmp_node1->next;
-    }
-
-    for (int i = road_y; i > 0; --i) {
-        if(i % 2 == 0) {
-            printf("  ");
-        }
-        else {
-
-        }
-        for (int j = 0; j < road_x; ++j) {
-            printf("%d%d  ",tmp_node2->Lighting,tmp_node2->Lighting);
-            tmp_node2 = tmp_node2->next;
-        }
-        printf("\n");
     }
 
 }

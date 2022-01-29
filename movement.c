@@ -676,6 +676,7 @@ void card_movement(struct characters *character_ptr,struct map *first_map_ptr,st
             card_movement(character_ptr,first_m,tunnel_out_ptr,road_x,road_y);
             return;
         }
+
     }
     tow_character_inone(character_ptr,tmpnode1,tmpnode2,yasli,xasli,tunnel_out_ptr,&T2,road_x,road_y);
 }

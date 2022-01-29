@@ -135,10 +135,10 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
             tmpnode1 = tmpnode1->next;
         }
 
-        if(*T == 1) {
+        if(T == 1) {
             *xasli = tmpnode1->x;
             *yasli = tmpnode1->y;
-            *T = 0;
+            T = 0;
             T2 = 1;
         }
 
@@ -150,7 +150,6 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
             serachx = tmpnode1->x;
             serachy = (tmpnode1->y) + 1;
         }
-
 
         if(serachy <= road_y - 1) {
             T2 = 0;
@@ -191,7 +190,7 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
         tmpnode1 = tmpnode2 = first_m;
         character_ptr = first_ch;
     }
-    if(!strcmp(choose_move,"UL")) {
+    else if(!strcmp(choose_move,"UL")) {
 
         while(tmpnode1 != NULL) {
             if(!strcmp(tmpnode1->person1,character_ptr->name) || !strcmp(tmpnode1->person2,character_ptr->name)) {
@@ -200,10 +199,10 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
             tmpnode1 = tmpnode1->next;
         }
 
-        if(*T == 1) {
+        if(T == 1) {
             *xasli = tmpnode1->x;
             *yasli = tmpnode1->y;
-            *T = 0;
+            T = 0;
             T2 = 1;
         }
 
@@ -264,10 +263,10 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
             tmpnode1 = tmpnode1->next;
         }
 
-        if(*T == 1) {
+        if(T == 1) {
             *xasli = tmpnode1->x;
             *yasli = tmpnode1->y;
-            *T = 0;
+            T = 0;
             T2 = 1;
         }
 
@@ -327,10 +326,10 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
             tmpnode1 = tmpnode1->next;
         }
 
-        if(*T == 1) {
+        if(T == 1) {
             *xasli = tmpnode1->x;
             *yasli = tmpnode1->y;
-            *T = 0;
+            T = 0;
             T2 = 1;
         }
 
@@ -390,10 +389,10 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
             tmpnode1 = tmpnode1->next;
         }
 
-        if(*T == 1) {
+        if(T == 1) {
             *xasli = tmpnode1->x;
             *yasli = tmpnode1->y;
-            *T = 0;
+            T = 0;
             T2 = 1;
         }
 
@@ -447,10 +446,10 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
             tmpnode1 = tmpnode1->next;
         }
 
-        if(*T == 1) {
+        if(T == 1) {
             *xasli = tmpnode1->x;
             *yasli = tmpnode1->y;
-            *T = 0;
+            T = 0;
             T2 = 1;
         }
 
@@ -496,13 +495,12 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
         character_ptr = first_ch;
     }
     else {
-        if(*T == 1) {
+        if(T == 1) {
             T2 = 1;
         }
         else {
             T2 = 0;
         }
-        come_back(*xasli,*yasli,character_ptr->name,first_m,&T2);
         SG_ability(character_ptr,first_map_ptr,road_x,road_y,i,T,xasli,yasli);
         return;
     }

@@ -136,7 +136,7 @@ void rounds_menu(struct map *fmap,int road_x,int road_y,struct characters *chara
             char str2[50];
             int card_array[8] = {0};
 
-            printf("Type the name of the file to load the game :\n");
+            printf("Type the name of the file to save the game :\n");
             scanf("%s",&str2);
 
             strcat(str1,str2);
@@ -182,6 +182,8 @@ void rounds_menu(struct map *fmap,int road_x,int road_y,struct characters *chara
 
 
             fclose(fpsave);
+
+            printf("Your game with name %s has been saved.",str2);
 
             exit(0);
         }

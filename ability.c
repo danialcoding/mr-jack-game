@@ -122,6 +122,7 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
     int serachx,serachy;
     int T2 = 0;
 
+
     printf("move %d :", i + 1);
     scanf("%s", choose_move);
 
@@ -149,6 +150,7 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
             serachx = tmpnode1->x;
             serachy = (tmpnode1->y) + 1;
         }
+
 
         if(serachy <= road_y - 1) {
             T2 = 0;
@@ -815,7 +817,6 @@ void card_ability(struct characters *character_ptr,struct characters *character_
         int *xasli = malloc(sizeof(int));
         int *yasli = malloc(sizeof(int));
         *T = 1;
-
 
         printf("You can do 3 move (up right = UR , up left = UL , down right = DR , down left = DL , right = R , left = L , use unnel = T , stop = X).\n");
         for (int i = 0; i < 3; ++i) {

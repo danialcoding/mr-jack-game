@@ -125,7 +125,7 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
     printf("move %d :", i + 1);
     scanf("%s", choose_move);
 
-    if(!strcmp(choose_move,"U")) {
+    if(!strcmp(choose_move,"UR")) {
 
         while(tmpnode1 != NULL) {
             if(!strcmp(tmpnode1->person1,character_ptr->name) || !strcmp(tmpnode1->person2,character_ptr->name)) {
@@ -141,8 +141,14 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
             T2 = 1;
         }
 
-        serachx = tmpnode1->x;
-        serachy = (tmpnode1->y) + 1;
+        if(tmpnode1->y % 2 == 1) {
+            serachx = tmpnode1->x + 1;
+            serachy = (tmpnode1->y) + 1;
+        }
+        else {
+            serachx = tmpnode1->x;
+            serachy = (tmpnode1->y) + 1;
+        }
 
         if(serachy <= road_y - 1) {
             T2 = 0;
@@ -159,7 +165,7 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
             tmpnode2 = tmpnode2->next;
         }
 
-        if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != *xasli || tmpnode2->y != *yasli) && tmpnode2->y <= road_y - 1) {
+        if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != *xasli || tmpnode2->y != *yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
             if(!strcmp(tmpnode1->person1,character_ptr->name)) {
                 tmpnode1->person1 = "NN";
             }
@@ -183,7 +189,71 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
         tmpnode1 = tmpnode2 = first_m;
         character_ptr = first_ch;
     }
-    else if(!strcmp(choose_move,"D")) {
+    if(!strcmp(choose_move,"UL")) {
+
+        while(tmpnode1 != NULL) {
+            if(!strcmp(tmpnode1->person1,character_ptr->name) || !strcmp(tmpnode1->person2,character_ptr->name)) {
+                break;
+            }
+            tmpnode1 = tmpnode1->next;
+        }
+
+        if(*T == 1) {
+            *xasli = tmpnode1->x;
+            *yasli = tmpnode1->y;
+            *T = 0;
+            T2 = 1;
+        }
+
+        if(tmpnode1->y % 2 == 1) {
+            serachx = tmpnode1->x;
+            serachy = (tmpnode1->y) + 1;
+        }
+        else {
+            serachx = tmpnode1->x - 1;
+            serachy = (tmpnode1->y) + 1;
+        }
+
+        if(serachy <= road_y - 1) {
+            T2 = 0;
+        }
+        else {
+            SG_ability(character_ptr,first_map_ptr,road_x,road_y,i,T,xasli,yasli);
+            return;
+        }
+
+        while(tmpnode2 != NULL) {
+            if(tmpnode2->y == serachy && tmpnode2->x == serachx) {
+                break;
+            }
+            tmpnode2 = tmpnode2->next;
+        }
+
+        if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != *xasli || tmpnode2->y != *yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
+            if(!strcmp(tmpnode1->person1,character_ptr->name)) {
+                tmpnode1->person1 = "NN";
+            }
+            else if(!strcmp(tmpnode1->person2,character_ptr->name)) {
+                tmpnode1->person2 = "NN";
+            }
+
+            if(!strcmp(tmpnode2->person1,"NN")) {
+                tmpnode2->person1 = character_ptr->name;
+            }
+            else if(!strcmp(tmpnode2->person2,"NN")) {
+                tmpnode2->person2 = character_ptr->name;
+            }
+            T2 = 0;
+        }
+        else {
+            SG_ability(character_ptr,first_map_ptr,road_x,road_y,i,T,xasli,yasli);
+            return;
+        }
+
+        tmpnode1 = tmpnode2 = first_m;
+        character_ptr = first_ch;
+    }
+    else if(!strcmp(choose_move,"DR")) {
 
         while(tmpnode1 != NULL) {
             if((!strcmp(tmpnode1->person1,character_ptr->name)) || (!strcmp(tmpnode1->person2,character_ptr->name))) {
@@ -199,8 +269,14 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
             T2 = 1;
         }
 
-        serachx = tmpnode1->x;
-        serachy = (tmpnode1->y) - 1;
+        if(tmpnode1->y % 2 == 1) {
+            serachx = tmpnode1->x + 1;
+            serachy = (tmpnode1->y) - 1;
+        }
+        else {
+            serachx = tmpnode1->x;
+            serachy = (tmpnode1->y) - 1;
+        }
 
         if(serachy >= 0) {
             T2 = 0;
@@ -217,7 +293,70 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
             tmpnode2 = tmpnode2->next;
         }
 
-        if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != *xasli || tmpnode2->y != *yasli) && tmpnode2->y >= 0) {
+        if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != *xasli || tmpnode2->y != *yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
+            if(!strcmp(tmpnode1->person1,character_ptr->name)) {
+                tmpnode1->person1 = "NN";
+            }
+            else if(!strcmp(tmpnode1->person2,character_ptr->name)) {
+                tmpnode1->person2 = "NN";
+            }
+
+            if(!strcmp(tmpnode2->person1,"NN")) {
+                tmpnode2->person1 = character_ptr->name;
+            }
+            else if(!strcmp(tmpnode2->person2,"NN")) {
+                tmpnode2->person2 = character_ptr->name;
+            }
+            T2 = 0;
+        }
+        else {
+            SG_ability(character_ptr,first_map_ptr,road_x,road_y,i,T,xasli,yasli);
+            return;
+        }
+        tmpnode1 = tmpnode2 = first_m;
+        character_ptr = first_ch;
+    }
+    else if(!strcmp(choose_move,"DL")) {
+
+        while(tmpnode1 != NULL) {
+            if((!strcmp(tmpnode1->person1,character_ptr->name)) || (!strcmp(tmpnode1->person2,character_ptr->name))) {
+                break;
+            }
+            tmpnode1 = tmpnode1->next;
+        }
+
+        if(*T == 1) {
+            *xasli = tmpnode1->x;
+            *yasli = tmpnode1->y;
+            *T = 0;
+            T2 = 1;
+        }
+
+        if(tmpnode1->y % 2 == 1) {
+            serachx = tmpnode1->x;
+            serachy = (tmpnode1->y) - 1;
+        }
+        else {
+            serachx = tmpnode1->x - 1;
+            serachy = (tmpnode1->y) - 1;
+        }
+
+        if(serachy >= 0) {
+            T2 = 0;
+        }
+        else {
+            SG_ability(character_ptr,first_map_ptr,road_x,road_y,i,T,xasli,yasli);
+            return;
+        }
+
+        while(tmpnode2 != NULL) {
+            if(tmpnode2->y == serachy && tmpnode2->x == serachx) {
+                break;
+            }
+            tmpnode2 = tmpnode2->next;
+        }
+
+        if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != *xasli || tmpnode2->y != *yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
             if(!strcmp(tmpnode1->person1,character_ptr->name)) {
                 tmpnode1->person1 = "NN";
             }
@@ -365,6 +504,7 @@ void SG_ability(struct characters *character_ptr,struct map *first_map_ptr,int r
         SG_ability(character_ptr,first_map_ptr,road_x,road_y,i,T,xasli,yasli);
         return;
     }
+
     SG_tow_character_inone(character_ptr,tmpnode1,tmpnode2,*yasli,*xasli,&T2,road_x,road_y,i,T);
 }
 
@@ -677,7 +817,7 @@ void card_ability(struct characters *character_ptr,struct characters *character_
         *T = 1;
 
 
-        printf("You can do 3 move (up = U , down = D , right = R , left = L).\n");
+        printf("You can do 3 move (up right = UR , up left = UL , down right = DR , down left = DL , right = R , left = L , use unnel = T , stop = X).\n");
         for (int i = 0; i < 3; ++i) {
             printf("characters :\n");
             while(tmpnode1 != NULL) {
@@ -711,14 +851,20 @@ void card_ability(struct characters *character_ptr,struct characters *character_
 
         char *user_choose = (char *)malloc(2 * sizeof(char));
 
-        printf("Select the direction of the flashlight (up = U , down = D , right = R , left = L):\n");
+        printf("Select the direction of the flashlight (up right = UR , up left = UL , down right = DR , down left = DL , right = R , left = L):\n");
         scanf("%s",user_choose);
 
-        if(!strcmp(user_choose,"U")) {
-            character_ptr->SG_ability_Direction = "U";
+        if(!strcmp(user_choose,"UR")) {
+            character_ptr->SG_ability_Direction = "UR";
         }
-        else if(!strcmp(user_choose,"D")) {
-            character_ptr->SG_ability_Direction = "D";
+        else if(!strcmp(user_choose,"UL")) {
+            character_ptr->SG_ability_Direction = "UL";
+        }
+        else if(!strcmp(user_choose,"DR")) {
+            character_ptr->SG_ability_Direction = "DR";
+        }
+        else if(!strcmp(user_choose,"DL")) {
+            character_ptr->SG_ability_Direction = "DL";
         }
         else if(!strcmp(user_choose,"R")) {
             character_ptr->SG_ability_Direction = "R";

@@ -199,42 +199,48 @@ struct map * read_map(struct map *fmap,int road_x,int road_y) {
 
 void print_map(struct map * tmp_node,int road_x,int road_y) {
     for (int i = road_y; i > 0; --i) {
+        if(i % 2 == 0) {
+            printf("  ");
+        }
+        else {
+
+        }
         for (int j = 0; j < road_x; ++j) {
-            if(!(!strcmp(tmp_node->person1,"NN")) && !(!strcmp(tmp_node->person2,"NN"))) {
-                printf("%s,%s ",tmp_node->person1,tmp_node->person2);
-            }
-            else if(!(!strcmp(tmp_node->person1,"NN"))) {
-                printf("%s ",tmp_node->person1);
+            /*if(!(!strcmp(tmp_node->person1,"NN")) && !(!strcmp(tmp_node->person2,"NN"))) {
+                printf("%s,%s  ",tmp_node->person1,tmp_node->person2);
+            }*/
+            if(!(!strcmp(tmp_node->person1,"NN"))) {
+                printf("%s  ",tmp_node->person1);
             }
             else if(!(!strcmp(tmp_node->person2,"NN"))) {
-                printf("%s ",tmp_node->person2);
+                printf("%s  ",tmp_node->person2);
             }
             else if(!strcmp(tmp_node->home,"HM")) {
-                printf("%s ",tmp_node->home);
+                printf("%s  ",tmp_node->home);
             }
             else if(!strcmp(tmp_node->exit,"EC")) {
-                printf("%s ",tmp_node->exit);
+                printf("%s  ",tmp_node->exit);
             }
             else if(!strcmp(tmp_node->exit,"EO")) {
-                printf("%s ",tmp_node->exit);
+                printf("%s  ",tmp_node->exit);
             }
             else if(!strcmp(tmp_node->light,"LN")) {
-                printf("%s ",tmp_node->light);
+                printf("%s  ",tmp_node->light);
             }
             else if(!strcmp(tmp_node->light,"LF")) {
-                printf("%s ",tmp_node->light);
+                printf("%s  ",tmp_node->light);
             }
             else if(!strcmp(tmp_node->tunnel,"TC")) {
-                printf("%s ",tmp_node->tunnel);
+                printf("%s  ",tmp_node->tunnel);
             }
             else if(!strcmp(tmp_node->tunnel,"TO")) {
-                printf("%s ",tmp_node->tunnel);
+                printf("%s  ",tmp_node->tunnel);
             }
             else if(!strcmp(tmp_node->road,"RD")) {
-                printf("%s ",tmp_node->road);
+                printf("%s  ",tmp_node->road);
             }
             else {
-                printf("NN ");
+                printf("NN  ");
             }
             tmp_node = tmp_node->next;
         }

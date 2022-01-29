@@ -201,7 +201,7 @@ void card_movement(struct characters *character_ptr,struct map *first_map_ptr,st
     int xasli,yasli,T = 1,T2 = 0;
     int tmp;
 
-    printf("You can do 1 to %d moves (up = U , down = D , right = R , left = L , use unnel = T , stop = X).\n",character_ptr->move);
+    printf("You can do 1 to %d moves (up right = UR , up left = UL , down right = DR , down left = DL , right = R , left = L , use tunnel = T , stop = X).\n",character_ptr->move);
 
     for (int i = 0; i < (character_ptr->move); ++i) {
         printf("move %d :",i+1);
@@ -281,7 +281,7 @@ void card_movement(struct characters *character_ptr,struct map *first_map_ptr,st
                 return;
             }
         }
-        else if(!strcmp(choose_move,"U")) {
+        else if(!strcmp(choose_move,"UR")) {
 
             while(tmpnode1 != NULL) {
                 if(!strcmp(tmpnode1->person1,character_ptr->name) || !strcmp(tmpnode1->person2,character_ptr->name)) {
@@ -297,8 +297,14 @@ void card_movement(struct characters *character_ptr,struct map *first_map_ptr,st
                 T2 = 1;
             }
 
-            serachx = tmpnode1->x;
-            serachy = (tmpnode1->y) + 1;
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x + 1;
+                serachy = (tmpnode1->y) + 1;
+            }
+            else {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) + 1;
+            }
 
             if(serachy <= road_y - 1) {
                 T2 = 0;
@@ -316,7 +322,7 @@ void card_movement(struct characters *character_ptr,struct map *first_map_ptr,st
                 tmpnode2 = tmpnode2->next;
             }
 
-            if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y <= road_y - 1) {
+            if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
                 if(!strcmp(tmpnode1->person1,character_ptr->name)) {
                     tmpnode1->person1 = "NN";
                 }
@@ -341,7 +347,73 @@ void card_movement(struct characters *character_ptr,struct map *first_map_ptr,st
             tmpnode1 = tmpnode2 = first_m;
             character_ptr = first_ch;
         }
-        else if(!strcmp(choose_move,"D")) {
+        else if(!strcmp(choose_move,"UL")) {
+
+            while(tmpnode1 != NULL) {
+                if(!strcmp(tmpnode1->person1,character_ptr->name) || !strcmp(tmpnode1->person2,character_ptr->name)) {
+                    break;
+                }
+                tmpnode1 = tmpnode1->next;
+            }
+
+            if(T == 1) {
+                xasli = tmpnode1->x;
+                yasli = tmpnode1->y;
+                T = 0;
+                T2 = 1;
+            }
+
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) + 1;
+            }
+            else {
+                serachx = tmpnode1->x - 1;
+                serachy = (tmpnode1->y) + 1;
+            }
+
+            if(serachy <= road_y - 1) {
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement(character_ptr,first_m,tunnel_out_ptr,road_x,road_y);
+                return;
+            }
+
+            while(tmpnode2 != NULL) {
+                if(tmpnode2->y == serachy && tmpnode2->x == serachx) {
+                    break;
+                }
+                tmpnode2 = tmpnode2->next;
+            }
+
+            if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
+                if(!strcmp(tmpnode1->person1,character_ptr->name)) {
+                    tmpnode1->person1 = "NN";
+                }
+                else if(!strcmp(tmpnode1->person2,character_ptr->name)) {
+                    tmpnode1->person2 = "NN";
+                }
+
+                if(!strcmp(tmpnode2->person1,"NN")) {
+                    tmpnode2->person1 = character_ptr->name;
+                }
+                else if(!strcmp(tmpnode2->person2,"NN")) {
+                    tmpnode2->person2 = character_ptr->name;
+                }
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement(character_ptr,first_m,tunnel_out_ptr,road_x,road_y);
+                return;
+            }
+
+            tmpnode1 = tmpnode2 = first_m;
+            character_ptr = first_ch;
+        }
+        else if(!strcmp(choose_move,"DR")) {
 
             while(tmpnode1 != NULL) {
                 if((!strcmp(tmpnode1->person1,character_ptr->name)) || (!strcmp(tmpnode1->person2,character_ptr->name))) {
@@ -357,8 +429,14 @@ void card_movement(struct characters *character_ptr,struct map *first_map_ptr,st
                 T2 = 1;
             }
 
-            serachx = tmpnode1->x;
-            serachy = (tmpnode1->y) - 1;
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x + 1;
+                serachy = (tmpnode1->y) - 1;
+            }
+            else {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) - 1;
+            }
 
             if(serachy >= 0) {
                 T2 = 0;
@@ -376,7 +454,72 @@ void card_movement(struct characters *character_ptr,struct map *first_map_ptr,st
                 tmpnode2 = tmpnode2->next;
             }
 
-            if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0) {
+            if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
+                if(!strcmp(tmpnode1->person1,character_ptr->name)) {
+                    tmpnode1->person1 = "NN";
+                }
+                else if(!strcmp(tmpnode1->person2,character_ptr->name)) {
+                    tmpnode1->person2 = "NN";
+                }
+
+                if(!strcmp(tmpnode2->person1,"NN")) {
+                    tmpnode2->person1 = character_ptr->name;
+                }
+                else if(!strcmp(tmpnode2->person2,"NN")) {
+                    tmpnode2->person2 = character_ptr->name;
+                }
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement(character_ptr,first_m,tunnel_out_ptr,road_x,road_y);
+                return;
+            }
+            tmpnode1 = tmpnode2 = first_m;
+            character_ptr = first_ch;
+        }
+        else if(!strcmp(choose_move,"DL")) {
+
+            while(tmpnode1 != NULL) {
+                if((!strcmp(tmpnode1->person1,character_ptr->name)) || (!strcmp(tmpnode1->person2,character_ptr->name))) {
+                    break;
+                }
+                tmpnode1 = tmpnode1->next;
+            }
+
+            if(T == 1) {
+                xasli = tmpnode1->x;
+                yasli = tmpnode1->y;
+                T = 0;
+                T2 = 1;
+            }
+
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) - 1;
+            }
+            else {
+                serachx = tmpnode1->x - 1;
+                serachy = (tmpnode1->y) - 1;
+            }
+
+            if(serachy >= 0) {
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement(character_ptr,first_m,tunnel_out_ptr,road_x,road_y);
+                return;
+            }
+
+            while(tmpnode2 != NULL) {
+                if(tmpnode2->y == serachy && tmpnode2->x == serachx) {
+                    break;
+                }
+                tmpnode2 = tmpnode2->next;
+            }
+
+            if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
                 if(!strcmp(tmpnode1->person1,character_ptr->name)) {
                     tmpnode1->person1 = "NN";
                 }
@@ -550,7 +693,7 @@ void card_movement_ms(struct characters *character_ptr,struct map *first_map_ptr
     int xasli,yasli,T = 1,T2 = 0;
     int tmp;
 
-    printf("You can do 1 to %d moves (up = U , down = D , right = R , left = L , use unnel = T , stop = X).\n",character_ptr->move);
+    printf("You can do 1 to %d moves (up right = UR , up left = UL , down right = DR , down left = DL , right = R , left = L , use tunnel = T , stop = X).\n",character_ptr->move);
 
     for (int i = 0; i < (character_ptr->move); ++i) {
         printf("move %d :",i+1);
@@ -630,7 +773,7 @@ void card_movement_ms(struct characters *character_ptr,struct map *first_map_ptr
                 return;
             }
         }
-        else if(!strcmp(choose_move,"U")) {
+        else if(!strcmp(choose_move,"UR")) {
 
             while(tmpnode1 != NULL) {
                 if(!strcmp(tmpnode1->person1,character_ptr->name) || !strcmp(tmpnode1->person2,character_ptr->name)) {
@@ -646,8 +789,14 @@ void card_movement_ms(struct characters *character_ptr,struct map *first_map_ptr
                 T2 = 1;
             }
 
-            serachx = tmpnode1->x;
-            serachy = (tmpnode1->y) + 1;
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x + 1;
+                serachy = (tmpnode1->y) + 1;
+            }
+            else {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) + 1;
+            }
 
             if(serachy <= road_y - 1) {
                 T2 = 0;
@@ -665,7 +814,7 @@ void card_movement_ms(struct characters *character_ptr,struct map *first_map_ptr
                 tmpnode2 = tmpnode2->next;
             }
 
-            if((!strcmp(tmpnode2->road,"RD") || !strcmp(tmpnode2->home,"HM") || !(!strcmp(tmpnode2->light,"NN"))) && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y <= road_y - 1) {
+            if((!strcmp(tmpnode2->road,"RD") || !strcmp(tmpnode2->home,"HM") || !(!strcmp(tmpnode2->light,"NN"))) && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
                 if(!strcmp(tmpnode1->person1,character_ptr->name)) {
                     tmpnode1->person1 = "NN";
                 }
@@ -690,7 +839,73 @@ void card_movement_ms(struct characters *character_ptr,struct map *first_map_ptr
             tmpnode1 = tmpnode2 = first_m;
             character_ptr = first_ch;
         }
-        else if(!strcmp(choose_move,"D")) {
+        else if(!strcmp(choose_move,"UL")) {
+
+            while(tmpnode1 != NULL) {
+                if(!strcmp(tmpnode1->person1,character_ptr->name) || !strcmp(tmpnode1->person2,character_ptr->name)) {
+                    break;
+                }
+                tmpnode1 = tmpnode1->next;
+            }
+
+            if(T == 1) {
+                xasli = tmpnode1->x;
+                yasli = tmpnode1->y;
+                T = 0;
+                T2 = 1;
+            }
+
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) + 1;
+            }
+            else {
+                serachx = tmpnode1->x - 1;
+                serachy = (tmpnode1->y) + 1;
+            }
+
+            if(serachy <= road_y - 1) {
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement(character_ptr,first_m,tunnel_out_ptr,road_x,road_y);
+                return;
+            }
+
+            while(tmpnode2 != NULL) {
+                if(tmpnode2->y == serachy && tmpnode2->x == serachx) {
+                    break;
+                }
+                tmpnode2 = tmpnode2->next;
+            }
+
+            if((!strcmp(tmpnode2->road,"RD") || !strcmp(tmpnode2->home,"HM") || !(!strcmp(tmpnode2->light,"NN"))) && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
+                if(!strcmp(tmpnode1->person1,character_ptr->name)) {
+                    tmpnode1->person1 = "NN";
+                }
+                else if(!strcmp(tmpnode1->person2,character_ptr->name)) {
+                    tmpnode1->person2 = "NN";
+                }
+
+                if(!strcmp(tmpnode2->person1,"NN")) {
+                    tmpnode2->person1 = character_ptr->name;
+                }
+                else if(!strcmp(tmpnode2->person2,"NN")) {
+                    tmpnode2->person2 = character_ptr->name;
+                }
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement_ms(character_ptr,first_m,tunnel_out_ptr,road_x,road_y);
+                return;
+            }
+
+            tmpnode1 = tmpnode2 = first_m;
+            character_ptr = first_ch;
+        }
+        else if(!strcmp(choose_move,"DR")) {
 
             while(tmpnode1 != NULL) {
                 if((!strcmp(tmpnode1->person1,character_ptr->name)) || (!strcmp(tmpnode1->person2,character_ptr->name))) {
@@ -706,8 +921,14 @@ void card_movement_ms(struct characters *character_ptr,struct map *first_map_ptr
                 T2 = 1;
             }
 
-            serachx = tmpnode1->x;
-            serachy = (tmpnode1->y) - 1;
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x + 1;
+                serachy = (tmpnode1->y) - 1;
+            }
+            else {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) - 1;
+            }
 
             if(serachy >= 0) {
                 T2 = 0;
@@ -725,7 +946,72 @@ void card_movement_ms(struct characters *character_ptr,struct map *first_map_ptr
                 tmpnode2 = tmpnode2->next;
             }
 
-            if((!strcmp(tmpnode2->road,"RD") || !strcmp(tmpnode2->home,"HM") || !(!strcmp(tmpnode2->light,"NN"))) && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0) {
+            if((!strcmp(tmpnode2->road,"RD") || !strcmp(tmpnode2->home,"HM") || !(!strcmp(tmpnode2->light,"NN"))) && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
+                if(!strcmp(tmpnode1->person1,character_ptr->name)) {
+                    tmpnode1->person1 = "NN";
+                }
+                else if(!strcmp(tmpnode1->person2,character_ptr->name)) {
+                    tmpnode1->person2 = "NN";
+                }
+
+                if(!strcmp(tmpnode2->person1,"NN")) {
+                    tmpnode2->person1 = character_ptr->name;
+                }
+                else if(!strcmp(tmpnode2->person2,"NN")) {
+                    tmpnode2->person2 = character_ptr->name;
+                }
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement_ms(character_ptr,first_m,tunnel_out_ptr,road_x,road_y);
+                return;
+            }
+            tmpnode1 = tmpnode2 = first_m;
+            character_ptr = first_ch;
+        }
+        else if(!strcmp(choose_move,"DL")) {
+
+            while(tmpnode1 != NULL) {
+                if((!strcmp(tmpnode1->person1,character_ptr->name)) || (!strcmp(tmpnode1->person2,character_ptr->name))) {
+                    break;
+                }
+                tmpnode1 = tmpnode1->next;
+            }
+
+            if(T == 1) {
+                xasli = tmpnode1->x;
+                yasli = tmpnode1->y;
+                T = 0;
+                T2 = 1;
+            }
+
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) - 1;
+            }
+            else {
+                serachx = tmpnode1->x - 1;
+                serachy = (tmpnode1->y) - 1;
+            }
+
+            if(serachy >= 0) {
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement(character_ptr,first_m,tunnel_out_ptr,road_x,road_y);
+                return;
+            }
+
+            while(tmpnode2 != NULL) {
+                if(tmpnode2->y == serachy && tmpnode2->x == serachx) {
+                    break;
+                }
+                tmpnode2 = tmpnode2->next;
+            }
+
+            if((!strcmp(tmpnode2->road,"RD") || !strcmp(tmpnode2->home,"HM") || !(!strcmp(tmpnode2->light,"NN"))) && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
                 if(!strcmp(tmpnode1->person1,character_ptr->name)) {
                     tmpnode1->person1 = "NN";
                 }
@@ -917,7 +1203,7 @@ void card_movement_Inspector(struct characters *character_ptr,struct map *first_
     int xasli,yasli,T = 1,T2 = 0;
     int tmp,TX = 1;
 
-    printf("You can do 1 to %d moves (up = U , down = D , right = R , left = L , use unnel = T , stop = X).\n",character_ptr->move);
+    printf("You can do 1 to %d moves (up right = UR , up left = UL , down right = DR , down left = DL , right = R , left = L , use tunnel = T , stop = X).\n",character_ptr->move);
     printf("To arrest any character, go to the house of that character and after stopping, agree to the arrest request.\n");
 
     for (int i = 0; i < (character_ptr->move); ++i) {
@@ -998,7 +1284,7 @@ void card_movement_Inspector(struct characters *character_ptr,struct map *first_
                 return;
             }
         }
-        else if(!strcmp(choose_move,"U")) {
+        else if(!strcmp(choose_move,"UR")) {
 
             while(tmpnode1 != NULL) {
                 if(!strcmp(tmpnode1->person1,character_ptr->name) || !strcmp(tmpnode1->person2,character_ptr->name)) {
@@ -1014,8 +1300,14 @@ void card_movement_Inspector(struct characters *character_ptr,struct map *first_
                 T2 = 1;
             }
 
-            serachx = tmpnode1->x;
-            serachy = (tmpnode1->y) + 1;
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x + 1;
+                serachy = (tmpnode1->y) + 1;
+            }
+            else {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) + 1;
+            }
 
             if(serachy <= road_y - 1) {
                 T2 = 0;
@@ -1033,7 +1325,7 @@ void card_movement_Inspector(struct characters *character_ptr,struct map *first_
                 tmpnode2 = tmpnode2->next;
             }
 
-            if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y <= road_y - 1) {
+            if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
                 if(!strcmp(tmpnode1->person1,character_ptr->name)) {
                     tmpnode1->person1 = "NN";
                 }
@@ -1058,7 +1350,73 @@ void card_movement_Inspector(struct characters *character_ptr,struct map *first_
             tmpnode1 = tmpnode2 = first_m;
             character_ptr = first_ch;
         }
-        else if(!strcmp(choose_move,"D")) {
+        else if(!strcmp(choose_move,"UL")) {
+
+            while(tmpnode1 != NULL) {
+                if(!strcmp(tmpnode1->person1,character_ptr->name) || !strcmp(tmpnode1->person2,character_ptr->name)) {
+                    break;
+                }
+                tmpnode1 = tmpnode1->next;
+            }
+
+            if(T == 1) {
+                xasli = tmpnode1->x;
+                yasli = tmpnode1->y;
+                T = 0;
+                T2 = 1;
+            }
+
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) + 1;
+            }
+            else {
+                serachx = tmpnode1->x - 1;
+                serachy = (tmpnode1->y) + 1;
+            }
+
+            if(serachy <= road_y - 1) {
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement_Inspector(character_ptr,first_m,tunnel_out_ptr,road_x,road_y,first_character_ptr);
+                return;
+            }
+
+            while(tmpnode2 != NULL) {
+                if(tmpnode2->y == serachy && tmpnode2->x == serachx) {
+                    break;
+                }
+                tmpnode2 = tmpnode2->next;
+            }
+
+            if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
+                if(!strcmp(tmpnode1->person1,character_ptr->name)) {
+                    tmpnode1->person1 = "NN";
+                }
+                else if(!strcmp(tmpnode1->person2,character_ptr->name)) {
+                    tmpnode1->person2 = "NN";
+                }
+
+                if(!strcmp(tmpnode2->person1,"NN")) {
+                    tmpnode2->person1 = character_ptr->name;
+                }
+                else if(!strcmp(tmpnode2->person2,"NN")) {
+                    tmpnode2->person2 = character_ptr->name;
+                }
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement_Inspector(character_ptr,first_m,tunnel_out_ptr,road_x,road_y,first_character_ptr);
+                return;
+            }
+
+            tmpnode1 = tmpnode2 = first_m;
+            character_ptr = first_ch;
+        }
+        else if(!strcmp(choose_move,"DR")) {
 
             while(tmpnode1 != NULL) {
                 if((!strcmp(tmpnode1->person1,character_ptr->name)) || (!strcmp(tmpnode1->person2,character_ptr->name))) {
@@ -1074,8 +1432,14 @@ void card_movement_Inspector(struct characters *character_ptr,struct map *first_
                 T2 = 1;
             }
 
-            serachx = tmpnode1->x;
-            serachy = (tmpnode1->y) - 1;
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x + 1;
+                serachy = (tmpnode1->y) - 1;
+            }
+            else {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) - 1;
+            }
 
             if(serachy >= 0) {
                 T2 = 0;
@@ -1093,7 +1457,72 @@ void card_movement_Inspector(struct characters *character_ptr,struct map *first_
                 tmpnode2 = tmpnode2->next;
             }
 
-            if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0) {
+            if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
+                if(!strcmp(tmpnode1->person1,character_ptr->name)) {
+                    tmpnode1->person1 = "NN";
+                }
+                else if(!strcmp(tmpnode1->person2,character_ptr->name)) {
+                    tmpnode1->person2 = "NN";
+                }
+
+                if(!strcmp(tmpnode2->person1,"NN")) {
+                    tmpnode2->person1 = character_ptr->name;
+                }
+                else if(!strcmp(tmpnode2->person2,"NN")) {
+                    tmpnode2->person2 = character_ptr->name;
+                }
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement_Inspector(character_ptr,first_m,tunnel_out_ptr,road_x,road_y,first_character_ptr);
+                return;
+            }
+            tmpnode1 = tmpnode2 = first_m;
+            character_ptr = first_ch;
+        }
+        else if(!strcmp(choose_move,"DL")) {
+
+            while(tmpnode1 != NULL) {
+                if((!strcmp(tmpnode1->person1,character_ptr->name)) || (!strcmp(tmpnode1->person2,character_ptr->name))) {
+                    break;
+                }
+                tmpnode1 = tmpnode1->next;
+            }
+
+            if(T == 1) {
+                xasli = tmpnode1->x;
+                yasli = tmpnode1->y;
+                T = 0;
+                T2 = 1;
+            }
+
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) - 1;
+            }
+            else {
+                serachx = tmpnode1->x - 1;
+                serachy = (tmpnode1->y) - 1;
+            }
+
+            if(serachy >= 0) {
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement_Inspector(character_ptr,first_m,tunnel_out_ptr,road_x,road_y,first_character_ptr);
+                return;
+            }
+
+            while(tmpnode2 != NULL) {
+                if(tmpnode2->y == serachy && tmpnode2->x == serachx) {
+                    break;
+                }
+                tmpnode2 = tmpnode2->next;
+            }
+
+            if(!strcmp(tmpnode2->road,"RD") && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
                 if(!strcmp(tmpnode1->person1,character_ptr->name)) {
                     tmpnode1->person1 = "NN";
                 }
@@ -1443,7 +1872,7 @@ void card_movement_Inspector_ms(struct characters *character_ptr,struct map *fir
     int xasli,yasli,T = 1,T2 = 0;
     int tmp,TX = 1;
 
-    printf("You can do 1 to %d moves (up = U , down = D , right = R , left = L , use unnel = T , stop = X).\n",character_ptr->move);
+    printf("You can do 1 to %d moves (up right = UR , up left = UL , down right = DR , down left = DL , right = R , left = L , use tunnel = T , stop = X).\n",character_ptr->move);
     printf("To arrest any character, go to the house of that character and after stopping, agree to the arrest request.\n");
 
     for (int i = 0; i < (character_ptr->move); ++i) {
@@ -1524,7 +1953,7 @@ void card_movement_Inspector_ms(struct characters *character_ptr,struct map *fir
                 return;
             }
         }
-        else if(!strcmp(choose_move,"U")) {
+        else if(!strcmp(choose_move,"UR")) {
 
             while(tmpnode1 != NULL) {
                 if(!strcmp(tmpnode1->person1,character_ptr->name) || !strcmp(tmpnode1->person2,character_ptr->name)) {
@@ -1540,8 +1969,14 @@ void card_movement_Inspector_ms(struct characters *character_ptr,struct map *fir
                 T2 = 1;
             }
 
-            serachx = tmpnode1->x;
-            serachy = (tmpnode1->y) + 1;
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x + 1;
+                serachy = (tmpnode1->y) + 1;
+            }
+            else {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) + 1;
+            }
 
             if(serachy <= road_y - 1) {
                 T2 = 0;
@@ -1559,7 +1994,7 @@ void card_movement_Inspector_ms(struct characters *character_ptr,struct map *fir
                 tmpnode2 = tmpnode2->next;
             }
 
-            if((!strcmp(tmpnode2->road,"RD") || !strcmp(tmpnode2->home,"HM") || !(!strcmp(tmpnode2->light,"NN"))) && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y <= road_y - 1) {
+            if((!strcmp(tmpnode2->road,"RD") || !strcmp(tmpnode2->home,"HM") || !(!strcmp(tmpnode2->light,"NN"))) && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
                 if(!strcmp(tmpnode1->person1,character_ptr->name)) {
                     tmpnode1->person1 = "NN";
                 }
@@ -1584,7 +2019,73 @@ void card_movement_Inspector_ms(struct characters *character_ptr,struct map *fir
             tmpnode1 = tmpnode2 = first_m;
             character_ptr = first_ch;
         }
-        else if(!strcmp(choose_move,"D")) {
+        else if(!strcmp(choose_move,"UL")) {
+
+            while(tmpnode1 != NULL) {
+                if(!strcmp(tmpnode1->person1,character_ptr->name) || !strcmp(tmpnode1->person2,character_ptr->name)) {
+                    break;
+                }
+                tmpnode1 = tmpnode1->next;
+            }
+
+            if(T == 1) {
+                xasli = tmpnode1->x;
+                yasli = tmpnode1->y;
+                T = 0;
+                T2 = 1;
+            }
+
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) + 1;
+            }
+            else {
+                serachx = tmpnode1->x - 1;
+                serachy = (tmpnode1->y) + 1;
+            }
+
+            if(serachy <= road_y - 1) {
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement_Inspector_ms(character_ptr,first_m,tunnel_out_ptr,road_x,road_y,first_character_ptr);
+                return;
+            }
+
+            while(tmpnode2 != NULL) {
+                if(tmpnode2->y == serachy && tmpnode2->x == serachx) {
+                    break;
+                }
+                tmpnode2 = tmpnode2->next;
+            }
+
+            if((!strcmp(tmpnode2->road,"RD") || !strcmp(tmpnode2->home,"HM") || !(!strcmp(tmpnode2->light,"NN"))) && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
+                if(!strcmp(tmpnode1->person1,character_ptr->name)) {
+                    tmpnode1->person1 = "NN";
+                }
+                else if(!strcmp(tmpnode1->person2,character_ptr->name)) {
+                    tmpnode1->person2 = "NN";
+                }
+
+                if(!strcmp(tmpnode2->person1,"NN")) {
+                    tmpnode2->person1 = character_ptr->name;
+                }
+                else if(!strcmp(tmpnode2->person2,"NN")) {
+                    tmpnode2->person2 = character_ptr->name;
+                }
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement_Inspector_ms(character_ptr,first_m,tunnel_out_ptr,road_x,road_y,first_character_ptr);
+                return;
+            }
+
+            tmpnode1 = tmpnode2 = first_m;
+            character_ptr = first_ch;
+        }
+        else if(!strcmp(choose_move,"DR")) {
 
             while(tmpnode1 != NULL) {
                 if((!strcmp(tmpnode1->person1,character_ptr->name)) || (!strcmp(tmpnode1->person2,character_ptr->name))) {
@@ -1600,8 +2101,14 @@ void card_movement_Inspector_ms(struct characters *character_ptr,struct map *fir
                 T2 = 1;
             }
 
-            serachx = tmpnode1->x;
-            serachy = (tmpnode1->y) - 1;
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x + 1;
+                serachy = (tmpnode1->y) - 1;
+            }
+            else {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) - 1;
+            }
 
             if(serachy >= 0) {
                 T2 = 0;
@@ -1619,7 +2126,72 @@ void card_movement_Inspector_ms(struct characters *character_ptr,struct map *fir
                 tmpnode2 = tmpnode2->next;
             }
 
-            if((!strcmp(tmpnode2->road,"RD") || !strcmp(tmpnode2->home,"HM") || !(!strcmp(tmpnode2->light,"NN"))) && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0) {
+            if((!strcmp(tmpnode2->road,"RD") || !strcmp(tmpnode2->home,"HM") || !(!strcmp(tmpnode2->light,"NN"))) && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
+                if(!strcmp(tmpnode1->person1,character_ptr->name)) {
+                    tmpnode1->person1 = "NN";
+                }
+                else if(!strcmp(tmpnode1->person2,character_ptr->name)) {
+                    tmpnode1->person2 = "NN";
+                }
+
+                if(!strcmp(tmpnode2->person1,"NN")) {
+                    tmpnode2->person1 = character_ptr->name;
+                }
+                else if(!strcmp(tmpnode2->person2,"NN")) {
+                    tmpnode2->person2 = character_ptr->name;
+                }
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement_Inspector_ms(character_ptr,first_m,tunnel_out_ptr,road_x,road_y,first_character_ptr);
+                return;
+            }
+            tmpnode1 = tmpnode2 = first_m;
+            character_ptr = first_ch;
+        }
+        else if(!strcmp(choose_move,"DL")) {
+
+            while(tmpnode1 != NULL) {
+                if((!strcmp(tmpnode1->person1,character_ptr->name)) || (!strcmp(tmpnode1->person2,character_ptr->name))) {
+                    break;
+                }
+                tmpnode1 = tmpnode1->next;
+            }
+
+            if(T == 1) {
+                xasli = tmpnode1->x;
+                yasli = tmpnode1->y;
+                T = 0;
+                T2 = 1;
+            }
+
+            if(tmpnode1->y % 2 == 1) {
+                serachx = tmpnode1->x;
+                serachy = (tmpnode1->y) - 1;
+            }
+            else {
+                serachx = tmpnode1->x - 1;
+                serachy = (tmpnode1->y) - 1;
+            }
+
+            if(serachy >= 0) {
+                T2 = 0;
+            }
+            else {
+                come_back(xasli,yasli,character_ptr->name,first_m,&T2);
+                card_movement_Inspector_ms(character_ptr,first_m,tunnel_out_ptr,road_x,road_y,first_character_ptr);
+                return;
+            }
+
+            while(tmpnode2 != NULL) {
+                if(tmpnode2->y == serachy && tmpnode2->x == serachx) {
+                    break;
+                }
+                tmpnode2 = tmpnode2->next;
+            }
+
+            if((!strcmp(tmpnode2->road,"RD") || !strcmp(tmpnode2->home,"HM") || !(!strcmp(tmpnode2->light,"NN"))) && (tmpnode2->x != xasli || tmpnode2->y != yasli) && tmpnode2->y >= 0 && tmpnode2->y <= road_y - 1 && tmpnode2->x <= road_x - 1 && tmpnode2->x >= 0) {
                 if(!strcmp(tmpnode1->person1,character_ptr->name)) {
                     tmpnode1->person1 = "NN";
                 }

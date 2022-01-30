@@ -451,7 +451,6 @@ void jack_check_visible(struct map *first_map_ptr3,struct characters *character_
         printf("\nJack is invisible.\n\n");
     }
 }
-/// add if jack out win and if next 8 rounds jack win
 
 void win_func(struct characters *character_ptr,struct map *first_map_ptr) {
     struct characters *first_char = character_ptr;
